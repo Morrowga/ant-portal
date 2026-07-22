@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Coffee tokens — cream #f4f4f4 / latte #d8c7b8 (buttons at 64% lightness
+   #bfa287) / espresso #6c4b36 / ink #2b2a2a / copper #a8672f. Same product
+   family as the dashboard, employee-scoped. */
+@layer base {
+  :root {
+    --background: 0 0% 95.7%;          /* cream */
+    --foreground: 0 1% 16.7%;          /* ink */
+    --card: 0 0% 100%;
+    --card-foreground: 0 1% 16.7%;
+    --primary: 29 30% 64%;             /* latte-deep — button weight */
+    --primary-foreground: 0 1% 16.7%;
+    --secondary: 28 29% 78%;           /* latte */
+    --secondary-foreground: 23 33% 25%;
+    --muted: 30 20% 92%;
+    --muted-foreground: 30 4% 53%;     /* faint */
+    --accent: 30 40% 91%;
+    --accent-foreground: 27 56% 35%;
+    --destructive: 8 56% 42%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 30 22% 87%;              /* line */
+    --input: 30 22% 82%;
+    --ring: 27 56% 42%;                /* copper */
+    --radius: 0.75rem;
+  }
+  * { @apply border-border; }
+  body { @apply bg-background text-foreground font-sans antialiased; font-size: 14px; }
+  h1, h2, h3, h4 { @apply font-display tracking-tight; }
+}
+
+@layer utilities {
+  .tabular { font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
