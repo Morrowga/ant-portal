@@ -14,6 +14,7 @@
  */
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { api, errorDetail } from "@/lib/api-client";
@@ -33,6 +34,7 @@ const PAGE_SIZE = 20;
 const toDateOnly = (value: string) => value.slice(0, 10);
 
 export function OvertimePage() {
+  const { t } = useTranslation();
   const qc = useQueryClient();
 
   const requests = useQuery({
@@ -82,25 +84,25 @@ export function OvertimePage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="text-xl font-semibold">Overtime</h1>
+      <h1 className="text-xl font-semibold">{t("features.overtime.pageTitle")}</h1>
       <p className="mt-1 text-sm text-muted-foreground">
-        Overtime needs a request and approval before it can start, and always ends with a short report.
+        {t("features.overtime.pageDescription")}
       </p>
 
       {/* State card: running > approved-for-today > nothing */}
       {open ? (
         <Card className="mt-4 border-espresso bg-espresso text-cream">
           <CardContent className="p-5">
-            <p className="font-display text-lg font-semibold text-cream">Overtime running</p>
-            <p className="mt-1 text-[13px] text-latte">since {fmtClock(open.start_at)}</p>
-            {open.reason && <p className="mt-2 text-[13px] text-latte">Reason: {open.reason}</p>}
+            <p className="font-display text-lg font-semibold text-cream">{t("features.overtime.running")}</p>
+            <p className="mt-1 text-[13px] text-latte">{t("features.overtime.since", { time: fmtClock(open.start_at) })}</p>
+            {open.reason && <p className="mt-2 text-[13px] text-latte">{t("features.overtime.reasonLabel", { reason: open.reason })}</p>}
             <Label className="mb-1.5 mt-4 block text-latte">
-              What did this overtime cover? (required to end the session)
+              {t("features.overtime.closingSummaryLabel")}
             </Label>
             <Textarea
               value={summary}
               onChange={(e) => setSummary(e.target.value)}
-              placeholder="A short closing report — this is mandatory, not optional."
+              placeholder={t("features.overtime.closingSummaryPlaceholder")}
               className="bg-cream/95 text-ink"
             />
             {error && <ErrorText>{error}</ErrorText>}
@@ -109,20 +111,20 @@ export function OvertimePage() {
               disabled={summary.trim().length < 3 || reportThenEnd.isPending}
               onClick={() => reportThenEnd.mutate()}
             >
-              {reportThenEnd.isPending ? "Closing…" : "Submit report & end overtime"}
+              {reportThenEnd.isPending ? t("features.overtime.closing") : t("features.overtime.submitAndEnd")}
             </Button>
           </CardContent>
         </Card>
       ) : approvedToday ? (
         <Card className="mt-4 border-espresso bg-espresso">
           <CardContent className="p-5">
-            <p className="font-display text-lg font-semibold text-cream">Approved for today</p>
+            <p className="font-display text-lg font-semibold text-cream">{t("features.overtime.approvedForToday")}</p>
             <p className="mt-1 text-[13px] text-latte">
               {approvedToday.planned_start_time} – {approvedToday.planned_end_time} · {approvedToday.reason}
             </p>
             {beforePlannedTime && (
               <p className="mt-2 text-[13px] text-latte">
-                Starts at {approvedToday.planned_start_time} — the button unlocks then.
+                {t("features.overtime.unlocksAt", { time: approvedToday.planned_start_time })}
               </p>
             )}
             {error && <ErrorText>{error}</ErrorText>}
@@ -131,16 +133,16 @@ export function OvertimePage() {
               disabled={beforePlannedTime || startSession.isPending}
               onClick={() => startSession.mutate()}
             >
-              {startSession.isPending ? "Starting…" : "Start overtime"}
+              {startSession.isPending ? t("features.overtime.starting") : t("features.overtime.startOvertime")}
             </Button>
           </CardContent>
         </Card>
       ) : (
         <Card className="mt-4">
           <CardContent className="p-5">
-            <p className="font-display text-lg font-semibold">No approved overtime today</p>
+            <p className="font-display text-lg font-semibold">{t("features.overtime.noApprovedToday")}</p>
             <p className="mt-1 text-[13px] text-muted-foreground">
-              Submit a request below for any day, including today — your manager approves it before you can start.
+              {t("features.overtime.submitBelowNote")}
             </p>
           </CardContent>
         </Card>
@@ -148,11 +150,13 @@ export function OvertimePage() {
 
       {existingTodayRequest ? (
         <>
-          <SectionTitle>Request overtime</SectionTitle>
+          <SectionTitle>{t("features.overtime.requestOvertime")}</SectionTitle>
           <Card>
             <CardContent className="p-5">
               <p className="text-sm font-medium">
-                You already have {existingTodayRequest.status === "approved" ? "an approved" : "a pending"} request for today
+                {existingTodayRequest.status === "approved"
+                  ? t("features.overtime.alreadyHaveApproved")
+                  : t("features.overtime.alreadyHavePending")}
               </p>
               <p className="mt-1 text-[13px] text-muted-foreground">
                 {existingTodayRequest.planned_start_time}–{existingTodayRequest.planned_end_time} · {existingTodayRequest.reason}
@@ -166,14 +170,14 @@ export function OvertimePage() {
 
       <Tabs defaultValue="requests" className="mt-8">
         <TabsList className="grid w-full grid-cols-2 sm:w-auto sm:inline-grid">
-          <TabsTrigger value="requests">Your requests</TabsTrigger>
-          <TabsTrigger value="sessions">Past sessions</TabsTrigger>
+          <TabsTrigger value="requests">{t("features.overtime.tabs.requests")}</TabsTrigger>
+          <TabsTrigger value="sessions">{t("features.overtime.tabs.sessions")}</TabsTrigger>
         </TabsList>
         <TabsContent value="requests">
           <QueryBoundary query={requests}>
             {(rows) => (
               <div className="space-y-2">
-                {rows.length === 0 && <EmptyText>No overtime requests yet.</EmptyText>}
+                {rows.length === 0 && <EmptyText>{t("features.overtime.noRequestsYet")}</EmptyText>}
                 {rows.map((request) => (
                   <Card key={request.id}>
                     <CardContent className="px-4 py-3">
@@ -181,13 +185,13 @@ export function OvertimePage() {
                         <p className="text-sm font-medium tabular">
                           {fmtDay(request.requested_date)} · {request.planned_start_time}–{request.planned_end_time}
                           {request.planned_end_time <= request.planned_start_time && (
-                            <span className="ml-1 text-xs font-normal text-muted-foreground">(next day)</span>
+                            <span className="ml-1 text-xs font-normal text-muted-foreground">{t("features.overtime.nextDay")}</span>
                           )}
                         </p>
                         <Badge
                           variant={request.status === "approved" ? "success" : request.status === "rejected" ? "destructive" : "warning"}
                         >
-                          {request.status}
+                          {t(`features.overtime.statuses.${request.status}`)}
                         </Badge>
                       </div>
                       <p className="mt-1 text-[13px] text-muted-foreground">{request.reason}</p>
@@ -208,6 +212,7 @@ export function OvertimePage() {
 
 /** Paginated closed-session history: pages of 20 with an explicit Load more. */
 function PastSessions() {
+  const { t } = useTranslation();
   const pages = useInfiniteQuery({
     queryKey: ["overtime", "sessions", "paginated"],
     queryFn: async ({ pageParam }) =>
@@ -217,14 +222,14 @@ function PastSessions() {
     initialPageParam: 0,
   });
 
-  if (pages.isPending) return <EmptyText>Loading…</EmptyText>;
+  if (pages.isPending) return <EmptyText>{t("features.overtime.loading")}</EmptyText>;
   if (pages.isError) return <ErrorText>{errorDetail(pages.error)}</ErrorText>;
 
   const rows = (pages.data?.pages ?? []).flat().filter((session) => !!session.end_at);
 
   return (
     <div className="space-y-2">
-      {rows.length === 0 && <EmptyText>No closed overtime sessions yet.</EmptyText>}
+      {rows.length === 0 && <EmptyText>{t("features.overtime.noClosedSessions")}</EmptyText>}
       {rows.map((session) => (
         <Link key={session.id} to={`/portal/overtime/${session.id}`} className="block">
           <Card className="transition-colors hover:bg-muted/40">
@@ -233,7 +238,7 @@ function PastSessions() {
                 <p className="text-sm font-medium">{fmtDay(session.start_at)}</p>
                 <Badge className="border-transparent bg-copper/10 text-copper tabular">{session.hours ?? "?"}h</Badge>
               </div>
-              {session.reason && <p className="mt-1 text-[13px]">Reason: {session.reason}</p>}
+              {session.reason && <p className="mt-1 text-[13px]">{t("features.overtime.reasonLabel", { reason: session.reason })}</p>}
               {session.summary && <p className="mt-1 line-clamp-2 text-[13px] text-muted-foreground">{session.summary}</p>}
             </CardContent>
           </Card>
@@ -242,7 +247,7 @@ function PastSessions() {
       {pages.hasNextPage && (
         <div className="pt-2 text-center">
           <Button variant="outline" disabled={pages.isFetchingNextPage} onClick={() => pages.fetchNextPage()}>
-            {pages.isFetchingNextPage ? "Loading…" : "Load more"}
+            {pages.isFetchingNextPage ? t("features.overtime.loading") : t("features.overtime.loadMore")}
           </Button>
         </div>
       )}
@@ -251,6 +256,7 @@ function PastSessions() {
 }
 
 function NewRequestForm({ onSubmitted }: { onSubmitted: () => void }) {
+  const { t } = useTranslation();
   // Native HTML date/time inputs — the web replacement for the mobile
   // app's @react-native-community/datetimepicker.
   const [date, setDate] = useState("");
@@ -283,41 +289,41 @@ function NewRequestForm({ onSubmitted }: { onSubmitted: () => void }) {
 
   return (
     <>
-      <SectionTitle>Request overtime</SectionTitle>
+      <SectionTitle>{t("features.overtime.requestOvertime")}</SectionTitle>
       <Card>
         <CardContent className="p-5">
           <div className="grid gap-3 sm:grid-cols-3">
             <div>
-              <Label htmlFor="ot-date" className="mb-1.5 block">Date</Label>
+              <Label htmlFor="ot-date" className="mb-1.5 block">{t("features.overtime.date")}</Label>
               <Input id="ot-date" type="date" min={todayStr()} value={date} onChange={(e) => setDate(e.target.value)} />
             </div>
             <div>
-              <Label htmlFor="ot-start" className="mb-1.5 block">Start time</Label>
+              <Label htmlFor="ot-start" className="mb-1.5 block">{t("features.overtime.startTime")}</Label>
               <Input id="ot-start" type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
             </div>
             <div>
-              <Label htmlFor="ot-end" className="mb-1.5 block">End time</Label>
+              <Label htmlFor="ot-end" className="mb-1.5 block">{t("features.overtime.endTime")}</Label>
               <Input id="ot-end" type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
             </div>
           </div>
           {startTime && endTime && startTime === endTime && (
-            <p className="mt-2 text-xs text-destructive">Start and end time can't be identical.</p>
+            <p className="mt-2 text-xs text-destructive">{t("features.overtime.identicalTimeError")}</p>
           )}
           {spansNextDay && (
             <p className="mt-2 text-xs text-muted-foreground">
-              This spans into the next day — ends at {endTime} the day after {date || "the selected date"}.
+              {t("features.overtime.spansNextDayNote", { time: endTime, date: date || t("features.overtime.selectedDate") })}
             </p>
           )}
-          <Label htmlFor="ot-reason" className="mb-1.5 mt-3 block">Why do you need overtime?</Label>
+          <Label htmlFor="ot-reason" className="mb-1.5 mt-3 block">{t("features.overtime.whyNeedOvertime")}</Label>
           <Textarea
             id="ot-reason"
             value={reason}
             onChange={(e) => setReason(e.target.value)}
-            placeholder="e.g. Closing out the Q3 report before tomorrow's deadline"
+            placeholder={t("features.overtime.reasonPlaceholder")}
           />
           {error && <ErrorText>{error}</ErrorText>}
           <Button className="mt-3" disabled={!canSubmit || submit.isPending} onClick={() => submit.mutate()}>
-            {submit.isPending ? "Sending…" : "Send request"}
+            {submit.isPending ? t("features.overtime.sending") : t("features.overtime.sendRequest")}
           </Button>
         </CardContent>
       </Card>

@@ -8,6 +8,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Droplet, Smile } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { api, errorDetail } from "@/lib/api-client";
 import { cn } from "@/lib/utils";
@@ -15,17 +16,19 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ErrorText } from "@/components/shared/bits";
 
+/** labelKey resolves under features.healthCheckin.sleepOptions.* */
 const SLEEP_OPTIONS = [
-  { label: "Less than 5h", hours: 4 },
-  { label: "5–6 hours", hours: 5.5 },
-  { label: "6–7 hours", hours: 6.5 },
-  { label: "7–8 hours", hours: 7.5 },
-  { label: "8+ hours", hours: 8.5 },
+  { labelKey: "lessThan5", hours: 4 },
+  { labelKey: "fiveToSix", hours: 5.5 },
+  { labelKey: "sixToSeven", hours: 6.5 },
+  { labelKey: "sevenToEight", hours: 7.5 },
+  { labelKey: "eightPlus", hours: 8.5 },
 ] as const;
 
 export function SleepCheckinDialog({ promptId, open, onDone, blocking = false }: {
   promptId: number | null; open: boolean; onDone: () => void; blocking?: boolean;
 }) {
+  const { t } = useTranslation();
   const qc = useQueryClient();
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
@@ -47,26 +50,28 @@ export function SleepCheckinDialog({ promptId, open, onDone, blocking = false }:
         {done ? (
           <div className="flex flex-col items-center py-8">
             <span className="text-4xl">✓</span>
-            <p className="mt-3 font-display font-semibold text-espresso">Logged!</p>
+            <p className="mt-3 font-display font-semibold text-espresso">{t("features.healthCheckin.logged")}</p>
           </div>
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle>How many hours did you sleep last night?</DialogTitle>
+              <DialogTitle>{t("features.healthCheckin.sleepQuestion")}</DialogTitle>
               <DialogDescription>
-                Only visible to you — never shared with your manager or company.
-                {blocking && " Answering this is required to continue."}
+                {t("features.healthCheckin.sleepPrivacyNote")}
+                {blocking && ` ${t("features.healthCheckin.requiredToContinue")}`}
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-2">
               {SLEEP_OPTIONS.map((option) => (
                 <Button
-                  key={option.label}
+                  key={option.labelKey}
                   variant="outline"
                   disabled={submit.isPending}
                   onClick={() => submit.mutate(option.hours)}
                 >
-                  {submit.isPending && submit.variables === option.hours ? "Saving…" : option.label}
+                  {submit.isPending && submit.variables === option.hours
+                    ? t("features.healthCheckin.saving")
+                    : t(`features.healthCheckin.sleepOptions.${option.labelKey}`)}
                 </Button>
               ))}
             </div>
@@ -79,12 +84,13 @@ export function SleepCheckinDialog({ promptId, open, onDone, blocking = false }:
 }
 
 const WATER_OPTIONS = [100, 200, 300, 500];
+/** labelKey resolves under features.healthCheckin.moodOptions.* */
 const MOOD_OPTIONS = [
-  { value: 5, emoji: "😄", label: "Great" },
-  { value: 4, emoji: "🙂", label: "Good" },
-  { value: 3, emoji: "😐", label: "Okay" },
-  { value: 2, emoji: "😕", label: "Low" },
-  { value: 1, emoji: "😣", label: "Rough" },
+  { value: 5, emoji: "😄", labelKey: "great" },
+  { value: 4, emoji: "🙂", labelKey: "good" },
+  { value: 3, emoji: "😐", labelKey: "okay" },
+  { value: 2, emoji: "😕", labelKey: "low" },
+  { value: 1, emoji: "😣", labelKey: "rough" },
 ] as const;
 
 /** One combined survey — both questions, one Submit (fired every ~2h
@@ -92,6 +98,7 @@ const MOOD_OPTIONS = [
 export function MoodWaterCheckinDialog({ promptId, open, onDone }: {
   promptId: number | null; open: boolean; onDone: () => void;
 }) {
+  const { t } = useTranslation();
   const qc = useQueryClient();
   const [waterMl, setWaterMl] = useState<number | null>(null);
   const [mood, setMood] = useState<number | null>(null);
@@ -119,20 +126,20 @@ export function MoodWaterCheckinDialog({ promptId, open, onDone }: {
         {done ? (
           <div className="flex flex-col items-center py-8">
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-latte-deep text-3xl">✓</div>
-            <p className="mt-4 font-display text-lg text-espresso">Thanks — logged!</p>
+            <p className="mt-4 font-display text-lg text-espresso">{t("features.healthCheckin.thanksLogged")}</p>
           </div>
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle>Quick check-in</DialogTitle>
-              <DialogDescription>Two quick questions — takes a few seconds.</DialogDescription>
+              <DialogTitle>{t("features.healthCheckin.quickCheckin")}</DialogTitle>
+              <DialogDescription>{t("features.healthCheckin.twoQuestionsNote")}</DialogDescription>
             </DialogHeader>
             <div className="rounded-xl border bg-cream/60 p-4">
               <div className="flex items-center gap-2.5">
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#eaf2f3]">
                   <Droplet className="h-4 w-4 text-[#3d7a85]" />
                 </span>
-                <p className="text-sm font-semibold">How much water have you had?</p>
+                <p className="text-sm font-semibold">{t("features.healthCheckin.waterQuestion")}</p>
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
                 {WATER_OPTIONS.map((ml) => (
@@ -145,7 +152,7 @@ export function MoodWaterCheckinDialog({ promptId, open, onDone }: {
                       waterMl === ml ? "border-espresso bg-espresso text-cream" : "border-line bg-card hover:bg-muted",
                     )}
                   >
-                    {ml}ml
+                    {t("features.healthCheckin.mlValue", { value: ml })}
                   </button>
                 ))}
               </div>
@@ -155,7 +162,7 @@ export function MoodWaterCheckinDialog({ promptId, open, onDone }: {
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#f3e9de]">
                   <Smile className="h-4 w-4 text-copper" />
                 </span>
-                <p className="text-sm font-semibold">How are you feeling right now?</p>
+                <p className="text-sm font-semibold">{t("features.healthCheckin.moodQuestion")}</p>
               </div>
               <div className="mt-4 flex justify-between">
                 {MOOD_OPTIONS.map((option) => (
@@ -169,7 +176,7 @@ export function MoodWaterCheckinDialog({ promptId, open, onDone }: {
                       {option.emoji}
                     </span>
                     <span className={cn("text-[11px]", mood === option.value ? "font-semibold text-espresso" : "text-muted-foreground")}>
-                      {option.label}
+                      {t(`features.healthCheckin.moodOptions.${option.labelKey}`)}
                     </span>
                   </button>
                 ))}
@@ -177,7 +184,7 @@ export function MoodWaterCheckinDialog({ promptId, open, onDone }: {
             </div>
             {error && <ErrorText>{error}</ErrorText>}
             <Button disabled={waterMl === null || mood === null || submit.isPending} onClick={() => submit.mutate()}>
-              {submit.isPending ? "Saving…" : "Submit"}
+              {submit.isPending ? t("features.healthCheckin.saving") : t("features.healthCheckin.submit")}
             </Button>
           </>
         )}

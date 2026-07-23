@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Pin } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import { api } from "@/lib/api-client";
@@ -14,6 +15,7 @@ import { EmptyText } from "@/components/shared/bits";
 import { QueryBoundary } from "@/components/shared/QueryBoundary";
 
 export function KnowledgeListPage() {
+  const { t } = useTranslation();
   const [tab, setTab] = useState<PostType>("knowledge");
   const [search, setSearch] = useState("");
 
@@ -21,27 +23,27 @@ export function KnowledgeListPage() {
     <div className="mx-auto max-w-2xl">
       <div className="flex items-end justify-between">
         <div>
-          <h1 className="text-xl font-semibold">Knowledge & Sharing</h1>
+          <h1 className="text-xl font-semibold">{t("features.knowledge.pageTitle")}</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             {tab === "knowledge"
-              ? "Company know-how and announcements. Must-reads need your acknowledgment."
-              : "Open posts anyone can share — everyone in the company can comment."}
+              ? t("features.knowledge.knowledgeDescription")
+              : t("features.knowledge.sharingDescription")}
           </p>
         </div>
         <Button asChild size="sm">
-          <Link to={`/portal/knowledge/new?post_type=${tab}`}>New post</Link>
+          <Link to={`/portal/knowledge/new?post_type=${tab}`}>{t("features.knowledge.newPost")}</Link>
         </Button>
       </div>
 
       <Tabs value={tab} onValueChange={(value) => setTab(value as PostType)} className="mt-4">
         <TabsList className="grid w-full grid-cols-2 sm:w-auto sm:inline-grid">
-          <TabsTrigger value="knowledge">Knowledge</TabsTrigger>
-          <TabsTrigger value="sharing">Sharing</TabsTrigger>
+          <TabsTrigger value="knowledge">{t("features.knowledge.tabs.knowledge")}</TabsTrigger>
+          <TabsTrigger value="sharing">{t("features.knowledge.tabs.sharing")}</TabsTrigger>
         </TabsList>
         <Input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search posts…"
+          placeholder={t("features.knowledge.searchPlaceholder")}
           className="mt-3 max-w-sm"
         />
         <TabsContent value="knowledge"><PostList type="knowledge" search={search} /></TabsContent>
@@ -52,6 +54,7 @@ export function KnowledgeListPage() {
 }
 
 function PostList({ type, search }: { type: PostType; search: string }) {
+  const { t } = useTranslation();
   const posts = useQuery({
     queryKey: ["knowledge", type, search],
     queryFn: async () =>
@@ -67,7 +70,7 @@ function PostList({ type, search }: { type: PostType; search: string }) {
         return (
           <div className="space-y-2">
             {sorted.length === 0 && (
-              <EmptyText>{type === "knowledge" ? "No posts found." : "No sharing posts yet — start one."}</EmptyText>
+              <EmptyText>{type === "knowledge" ? t("features.knowledge.noPostsFound") : t("features.knowledge.noSharingPostsYet")}</EmptyText>
             )}
             {sorted.map((post) => (
               <Link key={post.id} to={`/portal/knowledge/${post.id}`} className="block">
@@ -78,7 +81,7 @@ function PostList({ type, search }: { type: PostType; search: string }) {
                         {post.pinned && <Pin className="h-3.5 w-3.5 shrink-0 text-copper" />}
                         <span className="truncate">{post.title}</span>
                       </p>
-                      {post.must_acknowledge && <Badge variant="warning">must read</Badge>}
+                      {post.must_acknowledge && <Badge variant="warning">{t("features.knowledge.mustRead")}</Badge>}
                     </div>
                     {post.category && type === "knowledge" && (
                       <p className="mt-1 text-xs capitalize text-muted-foreground">{post.category.replace("_", " ")}</p>

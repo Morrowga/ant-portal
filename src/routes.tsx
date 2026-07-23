@@ -2,7 +2,9 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 
 import { EmployeeRoute, ProtectedRoute } from "@/components/layout/EmployeeRoute";
 import { PortalShell } from "@/components/layout/PortalShell";
-import { LoginPage, NotForYouPage } from "@/features/auth/pages";
+import { AcceptInvitePage, LoginPage, NotForYouPage } from "@/features/auth/pages";
+import { OnboardingConsentPage } from "@/features/onboarding/OnboardingConsentPage";
+import { OnboardingChecklistPage } from "@/features/onboarding/OnboardingChecklistPage";
 import { TodayPage } from "@/features/today/TodayPage";
 import { ReportsPage } from "@/features/reports/ReportsPage";
 import { NewReportPage } from "@/features/reports/NewReportPage";
@@ -20,6 +22,7 @@ import { SettingsPage } from "@/features/settings/SettingsPage";
 
 export const router = createBrowserRouter([
   { path: "/login", element: <LoginPage /> },
+  { path: "/accept-invite", element: <AcceptInvitePage /> },
   { path: "/not-for-you", element: <NotForYouPage /> },
   {
     element: <ProtectedRoute />,
@@ -27,6 +30,8 @@ export const router = createBrowserRouter([
       {
         element: <EmployeeRoute />,
         children: [
+          { path: "/onboarding/consent", element: <OnboardingConsentPage /> },
+          { path: "/onboarding/checklist", element: <OnboardingChecklistPage /> },
           {
             element: <PortalShell />,
             children: [

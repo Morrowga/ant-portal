@@ -5,6 +5,7 @@
  */
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import { api } from "@/lib/api-client";
 import type { CheckinPrompt, HealthDashboard } from "@/lib/types";
@@ -15,12 +16,14 @@ import { QueryBoundary } from "@/components/shared/QueryBoundary";
 
 import { MoodWaterCheckinDialog, SleepCheckinDialog } from "./checkin-dialogs";
 
-const PROMPT_LABEL: Record<CheckinPrompt["type"], string> = {
-  sleep_checkin: "Sleep check-in",
-  mood_water_checkin: "Mood & water check-in",
+/** labelKey resolves under features.health.promptTypes.* */
+const PROMPT_LABEL_KEY: Record<CheckinPrompt["type"], string> = {
+  sleep_checkin: "sleepCheckin",
+  mood_water_checkin: "moodWaterCheckin",
 };
 
 export function HealthPage() {
+  const { t, i18n } = useTranslation();
   const qc = useQueryClient();
   const dashboard = useQuery({
     queryKey: ["health", "dashboard"],
@@ -44,19 +47,19 @@ export function HealthPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="text-xl font-semibold">Your health</h1>
+      <h1 className="text-xl font-semibold">{t("features.health.pageTitle")}</h1>
       <p className="mt-1 text-sm text-muted-foreground">
-        Only you can see this. Your company only ever sees anonymous team averages — never your entries.
+        {t("features.health.pageDescription")}
       </p>
 
-      <SectionTitle>Reminders</SectionTitle>
+      <SectionTitle>{t("features.health.reminders")}</SectionTitle>
       <QueryBoundary query={pending}>
         {(rows) => (
           <div className="space-y-2">
             {rows.length === 0 && (
               <Card>
                 <CardContent className="py-6 text-center text-sm text-muted-foreground">
-                  All caught up — nothing waiting right now.
+                  {t("features.health.allCaughtUp")}
                 </CardContent>
               </Card>
             )}
@@ -65,10 +68,10 @@ export function HealthPage() {
                 <Card className="border-copper/40 bg-copper/5 transition-colors hover:bg-copper/10">
                   <CardContent className="flex items-center justify-between px-4 py-3">
                     <div>
-                      <p className="text-sm font-semibold text-espresso">{PROMPT_LABEL[prompt.type]}</p>
-                      <p className="mt-0.5 text-xs text-muted-foreground">Click to answer now</p>
+                      <p className="text-sm font-semibold text-espresso">{t(`features.health.promptTypes.${PROMPT_LABEL_KEY[prompt.type]}`)}</p>
+                      <p className="mt-0.5 text-xs text-muted-foreground">{t("features.health.clickToAnswer")}</p>
                     </div>
-                    <Badge variant="warning">unanswered</Badge>
+                    <Badge variant="warning">{t("features.health.unanswered")}</Badge>
                   </CardContent>
                 </Card>
               </button>
@@ -77,24 +80,24 @@ export function HealthPage() {
         )}
       </QueryBoundary>
 
-      <SectionTitle>Today's check-ins</SectionTitle>
+      <SectionTitle>{t("features.health.todaysCheckins")}</SectionTitle>
       <QueryBoundary query={todaysPrompts}>
         {(rows) => (
           <div className="space-y-2">
             {rows.length === 0 && (
-              <EmptyText>No reminders sent yet today — they'll appear here once you check in.</EmptyText>
+              <EmptyText>{t("features.health.noRemindersSentYet")}</EmptyText>
             )}
             {rows.map((prompt) => (
               <Card key={prompt.id}>
                 <CardContent className="flex items-center justify-between px-4 py-3">
                   <div>
-                    <p className="text-sm">{PROMPT_LABEL[prompt.type]}</p>
+                    <p className="text-sm">{t(`features.health.promptTypes.${PROMPT_LABEL_KEY[prompt.type]}`)}</p>
                     <p className="mt-0.5 text-xs text-muted-foreground">
-                      {new Date(prompt.sent_at).toLocaleTimeString("en", { hour: "numeric", minute: "2-digit" })}
+                      {new Date(prompt.sent_at).toLocaleTimeString(i18n.language, { hour: "numeric", minute: "2-digit" })}
                     </p>
                   </div>
                   <Badge variant={prompt.responded_at ? "success" : "warning"}>
-                    {prompt.responded_at ? "answered" : "unanswered"}
+                    {prompt.responded_at ? t("features.health.answered") : t("features.health.unanswered")}
                   </Badge>
                 </CardContent>
               </Card>
@@ -103,13 +106,13 @@ export function HealthPage() {
         )}
       </QueryBoundary>
 
-      <SectionTitle>This week</SectionTitle>
+      <SectionTitle>{t("features.health.thisWeek")}</SectionTitle>
       <QueryBoundary query={dashboard}>
         {(data) => (
           <div className="grid gap-2 sm:grid-cols-3">
-            <StatRow label="Average water / day" value={`${Math.round(sum(data.water) / 7)} ml`} />
-            <StatRow label="Average mood" value={data.mood.length ? (sum(data.mood) / data.mood.length).toFixed(1) + " / 5" : "—"} />
-            <StatRow label="Average sleep / day" value={data.sleep.length ? `${(sum(data.sleep) / 7).toFixed(1)} h` : "—"} />
+            <StatRow label={t("features.health.avgWaterPerDay")} value={t("features.health.mlValue", { value: Math.round(sum(data.water) / 7) })} />
+            <StatRow label={t("features.health.avgMood")} value={data.mood.length ? t("features.health.moodValue", { value: (sum(data.mood) / data.mood.length).toFixed(1) }) : "—"} />
+            <StatRow label={t("features.health.avgSleepPerDay")} value={data.sleep.length ? t("features.health.hoursValue", { value: (sum(data.sleep) / 7).toFixed(1) }) : "—"} />
           </div>
         )}
       </QueryBoundary>

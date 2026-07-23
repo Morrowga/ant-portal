@@ -1,0 +1,399 @@
+{
+  "common": {
+    "signOut": "साइन आउट",
+    "accountMenu": "खाता मेनू",
+    "employeePortal": "कर्मचारी पोर्टल"
+  },
+  "nav": {
+    "today": "आज",
+    "reports": "रिपोर्ट",
+    "health": "स्वास्थ्य",
+    "knowledge": "ज्ञान",
+    "leave": "छुट्टी",
+    "overtime": "ओवरटाइम",
+    "settings": "सेटिंग्स"
+  },
+  "shell": {
+    "notificationsAriaLabel": "Notifications, {{count}} unread"
+  },
+  "settings": {
+    "pageTitle": "सेटिंग्स",
+    "tabs": {
+      "certificates": "प्रमाण पत्र",
+      "kudos": "सराहना",
+      "attendance": "उपस्थिति",
+      "invoices": "चालान",
+      "feedback": "प्रतिक्रिया",
+      "language": "भाषा"
+    },
+    "certificates": {
+      "description": "हर महीने और साल के अंत में स्वचालित रूप से जारी किया जाता है — आपके काम का एक पोर्टेबल रिकॉर्ड। किसी अनुमोदन की आवश्यकता नहीं।",
+      "empty": "आपका पहला प्रमाण पत्र इस महीने के अंत में आएगा।",
+      "monthlyCertificate": "मासिक प्रमाण पत्र",
+      "yearlyCertificate": "वार्षिक प्रमाण पत्र",
+      "downloadPdf": "PDF डाउनलोड करें",
+      "generating": "बनाया जा रहा है"
+    },
+    "kudos": {
+      "description": "आपके प्रबंधकों द्वारा दी गई सराहना। ये आपके इम्पैक्ट स्कोर में भी योगदान देते हैं।",
+      "empty": "अभी तक कोई सराहना नहीं — मिलने पर यहाँ दिखाई देगी।"
+    },
+    "attendance": {
+      "empty": "अभी तक कोई उपस्थिति सत्र नहीं।",
+      "open": "खुला"
+    },
+    "invoices": {
+      "description": "आपकी कंपनी द्वारा प्रत्येक वेतन अवधि के लिए एक चालान तैयार किया जाता है। पूरी जानकारी देखने और डाउनलोड करने के लिए टैप करें।",
+      "empty": "अभी तक कोई चालान नहीं — जैसे ही आपकी कंपनी किसी वेतन अवधि के लिए चालान बनाएगी, यह यहाँ दिखेगा।",
+      "actual": "वास्तविक",
+      "scheduled": "निर्धारित"
+    },
+    "feedback": {
+      "harassmentNote": "उत्पीड़न की रिपोर्ट सीधे केवल कंपनी के मालिक को जाती है — प्रबंधक इसे कभी नहीं देखते।",
+      "messagePlaceholder": "क्या हो रहा है? जितना आप सहज महसूस करें, उतना विस्तार से बताएं।",
+      "submitAnonymously": "गुमनाम रूप से सबमिट करें",
+      "anonymousNote": "आपका नाम कभी नहीं जोड़ा जाता — मालिक के लिए भी नहीं।",
+      "sending": "भेजा जा रहा है…",
+      "send": "प्रतिक्रिया भेजें",
+      "yourTickets": "आपके टिकट",
+      "noneRaised": "अभी तक कुछ भी दर्ज नहीं किया गया।",
+      "submittedAnonymously": "गुमनाम रूप से सबमिट किया गया",
+      "categories": {
+        "workload": "कार्यभार",
+        "workplace": "कार्यस्थल",
+        "management": "प्रबंधन",
+        "harassment": "उत्पीड़न",
+        "other": "अन्य"
+      }
+    },
+    "language": {
+      "title": "प्रदर्शन भाषा",
+      "description": "आपकी कंपनी आपकी भाषा निर्धारित करती है, लेकिन आप कभी भी अंग्रेज़ी पर वापस जा सकते हैं।",
+      "useEnglish": "अंग्रेज़ी उपयोग करें",
+      "toggleOffHint": "बंद करने पर {{language}} पर वापस जाएं।",
+      "toggleOffHintNoAssigned": "आपकी कंपनी ने अभी तक कोई भाषा निर्धारित नहीं की है — इसका कोई प्रभाव नहीं होगा।",
+      "names": {
+        "en": "अंग्रेज़ी",
+        "ja": "जापानी",
+        "ko": "कोरियाई",
+        "zh": "चीनी",
+        "hi": "हिन्दी"
+      }
+    }
+  },
+  "features": {
+    "today": {
+      "greeting": "नमस्ते",
+      "greetingWithName": "नमस्ते, {{name}}",
+      "onTheClock": "कार्यरत",
+      "since": "{{time}} से",
+      "lateBadge": "{{minutes}} देरी",
+      "onTimeBadge": "समय पर",
+      "checkOut": "चेक आउट",
+      "checkingOut": "चेक आउट हो रहा है…",
+      "checkoutReportNote": "चेक आउट करने पर पहले आज की रिपोर्ट मांगी जाएगी, यदि आपने अभी तक सबमिट नहीं की है।",
+      "offTheClock": "कार्य समाप्त",
+      "reportAlreadySubmitted": "आज की रिपोर्ट पहले ही सबमिट हो चुकी है — कल मिलते हैं।",
+      "partTimeCheckInNote": "चेक इन करने पर आपका उपस्थिति सत्र शुरू हो जाएगा। आप दिन में एक बार ही चेक इन कर सकते हैं।",
+      "shiftEndedNote": "आज की शिफ्ट समाप्त हो चुकी है — आज चेक इन उपलब्ध नहीं है।",
+      "tooEarlyNote": "चेक इन शिफ्ट शुरू होने से 15 मिनट पहले खुलता है — अभी {{time}} बाकी है।",
+      "checkInStartsSessionNote": "चेक इन करने पर आपका उपस्थिति सत्र शुरू होगा।",
+      "checkIn": "चेक इन",
+      "checkingIn": "चेक इन हो रहा है…",
+      "flexibleHoursNote": "लचीला समय — कोई निश्चित शिफ्ट नहीं",
+      "shiftWindow": "शिफ्ट: {{start}} – {{end}} ({{tz}})",
+      "minutesLeftInShift": "शिफ्ट में {{time}} बाकी",
+      "shiftStartsIn": "शिफ्ट {{time}} में शुरू होगी",
+      "onBreak": "ब्रेक पर",
+      "onBreakBadge": "ब्रेक पर",
+      "endBreak": "ब्रेक समाप्त करें",
+      "breakTime": "ब्रेक समय",
+      "breakMinutesToday": "आज {{time}}",
+      "noBreakYetToday": "आज अभी तक नहीं",
+      "startBreak": "ब्रेक शुरू करें",
+      "breakExcludedNote": "ब्रेक का समय आपके क्रेडिट घंटों में नहीं जोड़ा जाता।",
+      "checkedInLate": "आप {{minutes}} देरी से चेक इन हुए।",
+      "checkedOutEarly": "आप {{minutes}} पहले चेक आउट हो गए।",
+      "dismiss": "बंद करें",
+      "quickLinks": {
+        "leave": "छुट्टी",
+        "overtime": "ओवरटाइम",
+        "history": "इतिहास",
+        "kudos": "सराहना"
+      },
+      "thisWeek": "इस सप्ताह",
+      "reportsSubmitted": "सबमिट की गई रिपोर्ट",
+      "hoursLogged": "दर्ज किए गए घंटे",
+      "averagePerDay": "प्रति दिन औसत",
+      "kudosReceived": "मिली सराहना"
+    },
+    "reports": {
+      "pageTitle": "आपकी रिपोर्ट",
+      "pageDescription": "आपने रोज़ क्या काम किया, यहाँ देखें। रिपोर्ट आधी रात को लॉक हो जाती हैं — संपादन केवल उसी दिन संभव है।",
+      "tabs": {
+        "daily": "दैनिक रिपोर्ट",
+        "overtime": "ओवरटाइम"
+      },
+      "daily": {
+        "empty": "अभी तक कोई रिपोर्ट नहीं — पहली रिपोर्ट आज के पेज पर चेक आउट करते समय बनेगी।",
+        "editableToday": "आज संपादन योग्य",
+        "locked": "लॉक"
+      },
+      "overtime": {
+        "empty": "अभी तक कोई ओवरटाइम सत्र नहीं।",
+        "closed": "बंद",
+        "inProgress": "जारी है",
+        "noSummaryYet": "अभी तक कोई सारांश नहीं"
+      }
+    },
+    "reportDetail": {
+      "reports": "रिपोर्ट",
+      "edit": "संपादित करें",
+      "delete": "हटाएं",
+      "lockedNote": "लॉक — रिपोर्ट केवल लिखे जाने के दिन ही संपादित की जा सकती है। आपका मैनेजर फिर भी टिप्पणी कर सकता है।",
+      "workdayPace": "कार्यदिवस की गति",
+      "paceUnavailable": "इस रिपोर्ट के लिए गति विश्लेषण उपलब्ध नहीं है — यह Mid प्लान या उससे ऊपर की कंपनियों में सबमिट करने के कुछ देर बाद दिखाई देता है।",
+      "managerComments": "मैनेजर की टिप्पणियां",
+      "noComments": "अभी तक कोई टिप्पणी नहीं।",
+      "hoursAriaLabel": "घंटे",
+      "saveChanges": "बदलाव सहेजें"
+    },
+    "newReport": {
+      "finishCheckingOut": "चेक आउट पूरा करें",
+      "newReport": "नई रिपोर्ट",
+      "answerHealthFirst": "पहले अपना स्वास्थ्य चेक-इन जवाब दें",
+      "multiplePending": "आज आपके {{count}} अनुत्तरित चेक-इन हैं।",
+      "singlePending": "बस एक छोटा सा सवाल, फिर रिपोर्ट फॉर्म यहीं दिखाई देगा।",
+      "answerNow": "अभी जवाब दें",
+      "actualWorkedNote": "आपने आज वास्तव में {{time}} काम किया है (ब्रेक को छोड़कर)। नीचे अपने कार्य दर्ज करें — कुल इससे कम हो सकता है, लेकिन अधिक नहीं।",
+      "fillOutToFinish": "चेक आउट पूरा करने के लिए आज की रिपोर्ट भरें।",
+      "entryNumber": "प्रविष्टि {{number}}",
+      "project": "प्रोजेक्ट",
+      "timeSpent": "लगाया गया समय",
+      "hoursAriaLabel": "घंटे",
+      "hoursUnit": "घंटे",
+      "minutesAriaLabel": "मिनट",
+      "minutesUnit": "मिनट",
+      "whatDidYouWorkOn": "आपने क्या काम किया?",
+      "summaryPlaceholder": "कुछ वाक्यों में लिखें — यही आपका मैनेजर और गति विश्लेषण पढ़ता है।",
+      "overCeiling": "दर्ज किया गया कुल ({{entered}}) आपके वास्तविक कार्य घंटों ({{actual}}) से अधिक है। कृपया प्रविष्टियाँ कम करें।",
+      "todayInvoice": "आज का चालान",
+      "addAnotherEntry": "और प्रविष्टि जोड़ें",
+      "submitting": "सबमिट हो रहा है…",
+      "submitAndCheckOut": "सबमिट करें और चेक आउट करें",
+      "submitReport": "रिपोर्ट सबमिट करें",
+      "nothingToReport": "आज कुछ भी रिपोर्ट करने योग्य नहीं",
+      "invoiceDialog": {
+        "title": "आज का चालान",
+        "loading": "लोड हो रहा है…",
+        "scheduledShift": "निर्धारित शिफ्ट",
+        "timeCheckedIn": "चेक इन का समय",
+        "breakTimeExcluded": "ब्रेक समय (बाहर)",
+        "lateArrival": "देरी से आना",
+        "none": "कोई नहीं",
+        "unansweredPresenceChecks": "अनुत्तरित उपस्थिति जांच",
+        "deductionsOffNote": "आपकी कंपनी द्वारा बिना जवाब की कटौती बंद कर दी गई है।",
+        "creditedHours": "क्रेडिट घंटे"
+      }
+    },
+    "health": {
+      "pageTitle": "आपका स्वास्थ्य",
+      "pageDescription": "यह केवल आप देख सकते हैं। आपकी कंपनी केवल अज्ञात टीम औसत देखती है — आपकी व्यक्तिगत प्रविष्टियाँ कभी नहीं।",
+      "reminders": "रिमाइंडर",
+      "allCaughtUp": "सब पूरा हो गया — अभी कुछ भी प्रतीक्षा में नहीं है।",
+      "clickToAnswer": "अभी जवाब देने के लिए क्लिक करें",
+      "unanswered": "अनुत्तरित",
+      "answered": "उत्तर दिया",
+      "todaysCheckins": "आज के चेक-इन",
+      "noRemindersSentYet": "आज अभी तक कोई रिमाइंडर नहीं भेजा गया — चेक इन करने के बाद यहाँ दिखेंगे।",
+      "thisWeek": "इस सप्ताह",
+      "avgWaterPerDay": "प्रति दिन औसत पानी",
+      "avgMood": "औसत मूड",
+      "avgSleepPerDay": "प्रति दिन औसत नींद",
+      "mlValue": "{{value}} ml",
+      "moodValue": "{{value}} / 5",
+      "hoursValue": "{{value}} घंटे",
+      "promptTypes": {
+        "sleepCheckin": "नींद चेक-इन",
+        "moodWaterCheckin": "मूड और पानी चेक-इन"
+      }
+    },
+    "healthCheckin": {
+      "logged": "दर्ज हो गया!",
+      "sleepQuestion": "आप कल रात कितने घंटे सोए?",
+      "sleepPrivacyNote": "केवल आप देख सकते हैं — आपके मैनेजर या कंपनी के साथ कभी साझा नहीं किया जाएगा।",
+      "requiredToContinue": "जारी रखने के लिए इस सवाल का जवाब देना ज़रूरी है।",
+      "saving": "सहेजा जा रहा है…",
+      "sleepOptions": {
+        "lessThan5": "5 घंटे से कम",
+        "fiveToSix": "5–6 घंटे",
+        "sixToSeven": "6–7 घंटे",
+        "sevenToEight": "7–8 घंटे",
+        "eightPlus": "8+ घंटे"
+      },
+      "thanksLogged": "धन्यवाद — दर्ज हो गया!",
+      "quickCheckin": "त्वरित चेक-इन",
+      "twoQuestionsNote": "दो छोटे सवाल — कुछ सेकंड लगेंगे।",
+      "waterQuestion": "आपने आज कितना पानी पिया?",
+      "mlValue": "{{value}}ml",
+      "moodQuestion": "अभी आप कैसा महसूस कर रहे हैं?",
+      "moodOptions": {
+        "great": "बहुत अच्छा",
+        "good": "अच्छा",
+        "okay": "ठीक है",
+        "low": "थोड़ा कम",
+        "rough": "बुरा"
+      },
+      "submit": "सबमिट करें"
+    },
+    "knowledge": {
+      "pageTitle": "ज्ञान और साझाकरण",
+      "knowledgeDescription": "कंपनी की जानकारी और घोषणाएं। आवश्यक पठन के लिए आपकी पुष्टि जरूरी है।",
+      "sharingDescription": "खुली पोस्ट जो कोई भी साझा कर सकता है — कंपनी के सभी लोग टिप्पणी कर सकते हैं।",
+      "newPost": "नई पोस्ट",
+      "tabs": {
+        "knowledge": "ज्ञान",
+        "sharing": "साझाकरण"
+      },
+      "searchPlaceholder": "पोस्ट खोजें…",
+      "noPostsFound": "कोई पोस्ट नहीं मिली।",
+      "noSharingPostsYet": "अभी तक कोई साझा पोस्ट नहीं — पहली पोस्ट शुरू करें।",
+      "mustRead": "अवश्य पढ़ें"
+    },
+    "knowledgeNew": {
+      "knowledgeAndSharing": "ज्ञान और साझाकरण",
+      "newPost": "नई पोस्ट",
+      "type": "प्रकार",
+      "knowledgeHint": "कंपनी का ज्ञान — पोस्ट करना आपकी कंपनी की सेटिंग्स द्वारा सीमित हो सकता है।",
+      "sharingHint": "सभी के लिए पोस्ट करने हेतु खुला — कोई श्रेणी नहीं, बस एक पोस्ट जिस पर कंपनी के सभी लोग टिप्पणी कर सकते हैं।",
+      "titleLabel": "शीर्षक",
+      "titlePlaceholder": "कुछ साझा करने योग्य",
+      "bodyLabel": "विवरण",
+      "bodyPlaceholder": "इसे ऐसे लिखें जैसे आप किसी नए साथी को समझा रहे हों। लिंक क्लिक करने योग्य बन जाएंगे।",
+      "publishing": "प्रकाशित हो रहा है…",
+      "publish": "प्रकाशित करें"
+    },
+    "knowledgePost": {
+      "comments": "टिप्पणियां ({{count}})",
+      "noComments": "अभी तक कोई टिप्पणी नहीं — पहले जवाब देने वाले बनें।",
+      "you": "आप",
+      "someone": "कोई",
+      "author": "लेखक",
+      "commentPlaceholder": "कोई टिप्पणी या सुझाव जोड़ें…",
+      "postComment": "टिप्पणी पोस्ट करें",
+      "acknowledged": "पुष्टि की ✓",
+      "mustReadNote": "यह अवश्य पढ़ें। पढ़ने के बाद पुष्टि करें — आपकी कंपनी देख सकती है कि किसने पुष्टि की है।",
+      "iveReadThis": "मैंने यह पढ़ लिया"
+    },
+    "leave": {
+      "pageTitle": "छुट्टी",
+      "requestLeave": "छुट्टी का अनुरोध करें",
+      "partialDayQuestion": "केवल दिन का एक हिस्सा?",
+      "partialDayExample": "जैसे बैंक के काम के लिए 2 घंटे",
+      "date": "तारीख",
+      "from": "से",
+      "until": "तक",
+      "firstDay": "पहला दिन",
+      "lastDay": "आखिरी दिन",
+      "endTimeError": "समाप्ति समय प्रारंभ समय के बाद होना चाहिए।",
+      "sending": "भेजा जा रहा है…",
+      "sendRequest": "अनुरोध भेजें",
+      "yourRequests": "आपके अनुरोध",
+      "empty": "अभी तक कोई छुट्टी अनुरोध नहीं।",
+      "types": {
+        "annual": "वार्षिक",
+        "sick": "बीमारी",
+        "unpaid": "अवैतनिक",
+        "other": "अन्य"
+      },
+      "statuses": {
+        "pending": "लंबित",
+        "approved": "स्वीकृत",
+        "rejected": "अस्वीकृत"
+      }
+    },
+    "overtime": {
+      "pageTitle": "ओवरटाइम",
+      "pageDescription": "ओवरटाइम शुरू करने से पहले अनुरोध और अनुमोदन जरूरी है, और यह हमेशा एक छोटी रिपोर्ट के साथ समाप्त होता है।",
+      "running": "ओवरटाइम जारी है",
+      "since": "{{time}} से",
+      "reasonLabel": "कारण: {{reason}}",
+      "closingSummaryLabel": "इस ओवरटाइम में क्या काम हुआ? (सत्र समाप्त करने के लिए आवश्यक)",
+      "closingSummaryPlaceholder": "एक छोटी समापन रिपोर्ट — यह अनिवार्य है, वैकल्पिक नहीं।",
+      "closing": "बंद हो रहा है…",
+      "submitAndEnd": "रिपोर्ट सबमिट करें और ओवरटाइम समाप्त करें",
+      "approvedForToday": "आज के लिए स्वीकृत",
+      "unlocksAt": "{{time}} पर शुरू होगा — तब बटन सक्रिय हो जाएगा।",
+      "starting": "शुरू हो रहा है…",
+      "startOvertime": "ओवरटाइम शुरू करें",
+      "noApprovedToday": "आज कोई स्वीकृत ओवरटाइम नहीं",
+      "submitBelowNote": "आज सहित किसी भी दिन के लिए नीचे अनुरोध सबमिट करें — आपका मैनेजर इसे स्वीकृत करने के बाद आप शुरू कर सकते हैं।",
+      "requestOvertime": "ओवरटाइम का अनुरोध करें",
+      "alreadyHaveApproved": "आज के लिए पहले से एक स्वीकृत अनुरोध है",
+      "alreadyHavePending": "आज के लिए पहले से एक लंबित अनुरोध है",
+      "tabs": {
+        "requests": "आपके अनुरोध",
+        "sessions": "पिछले सत्र"
+      },
+      "noRequestsYet": "अभी तक कोई ओवरटाइम अनुरोध नहीं।",
+      "nextDay": "(अगला दिन)",
+      "loading": "लोड हो रहा है…",
+      "noClosedSessions": "अभी तक कोई बंद ओवरटाइम सत्र नहीं।",
+      "loadMore": "और लोड करें",
+      "date": "तारीख",
+      "startTime": "प्रारंभ समय",
+      "endTime": "समाप्ति समय",
+      "identicalTimeError": "प्रारंभ और समाप्ति समय एक जैसे नहीं हो सकते।",
+      "spansNextDayNote": "यह अगले दिन तक जाता है — {{date}} के अगले दिन {{time}} पर समाप्त होगा।",
+      "selectedDate": "चुनी गई तारीख",
+      "whyNeedOvertime": "आपको ओवरटाइम की जरूरत क्यों है?",
+      "reasonPlaceholder": "जैसे कल की समय सीमा से पहले Q3 रिपोर्ट पूरी करना",
+      "sending": "भेजा जा रहा है…",
+      "sendRequest": "अनुरोध भेजें",
+      "statuses": {
+        "pending": "लंबित",
+        "approved": "स्वीकृत",
+        "rejected": "अस्वीकृत"
+      }
+    },
+    "overtimeDetail": {
+      "overtime": "ओवरटाइम",
+      "closed": "बंद",
+      "inProgress": "जारी है",
+      "ended": "{{time}} पर समाप्त",
+      "stillRunning": "अभी भी जारी है",
+      "initiatedBy": "{{who}} द्वारा शुरू किया गया",
+      "reason": "कारण",
+      "closingSummary": "समापन सारांश",
+      "noSummaryRecorded": "कोई सारांश दर्ज नहीं किया गया।",
+      "notClosedYet": "अभी तक बंद नहीं — इस सत्र को समाप्त करने से पहले सारांश आवश्यक है।",
+      "aiSummary": "AI सारांश"
+    },
+    "notifications": {
+      "pageTitle": "सूचनाएं",
+      "empty": "सब शांत है।"
+    },
+    "onboardingConsent": {
+      "title": "शुरू करने से पहले",
+      "subtitle": "हर विकल्प आपका अपना निर्णय है, जो अलग-अलग दर्ज होता है। इनमें से कोई भी चुने बिना भी काम कर सकते हैं।",
+      "saving": "सेव हो रहा है…",
+      "saveChoices": "मेरे विकल्प सेव करें",
+      "items": {
+        "healthTitle": "व्यक्तिगत स्वास्थ्य ट्रैकिंग",
+        "healthBody": "पानी, मूड, ब्रेक, कदम और नींद — केवल आप ही देख सकते हैं। आपके मैनेजर या कंपनी को कभी आपकी व्यक्तिगत एंट्री नहीं दिखती; टीम को केवल 3 या अधिक लोगों का गुमनाम औसत दिखता है।",
+        "notificationsTitle": "सूचनाएं",
+        "notificationsBody": "चेक-इन, दैनिक रिपोर्ट सबमिट करने, ब्रेक लेने और कंपनी के अपडेट की रिमाइंडर।"
+      }
+    },
+    "onboardingChecklist": {
+      "title": "आपके पहले कदम",
+      "subtitle": "आपकी कंपनी ने नए सदस्यों के लिए यह सेट किया है। जैसे-जैसे पूरा करें, चेक करते जाएं — यह सूची आपकी प्रोफ़ाइल पर सेव रहेगी।",
+      "empty": "कोई चेकलिस्ट आइटम नहीं — सब ठीक है।",
+      "done": "पूर्ण",
+      "required": "आवश्यक",
+      "optional": "वैकल्पिक",
+      "finishing": "पूरा हो रहा है…",
+      "takeMeToApp": "ऐप पर जाएं"
+    }
+  }
+}

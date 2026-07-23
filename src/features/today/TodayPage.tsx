@@ -20,6 +20,7 @@
  */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 
 import { api, errorDetail } from "@/lib/api-client";
@@ -38,6 +39,7 @@ import { SleepCheckinDialog } from "@/features/health/checkin-dialogs";
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 export function TodayPage() {
+  const { t, i18n } = useTranslation();
   const qc = useQueryClient();
   const navigate = useNavigate();
   const me = useQuery({
@@ -101,7 +103,7 @@ export function TodayPage() {
     onSuccess: (data) => {
       qc.invalidateQueries({ queryKey: ["attendance"] });
       if (typeof data.late_minutes === "number" && data.late_minutes > 0) {
-        setNotice(`You checked in ${fmtMinutes(data.late_minutes)} late.`);
+        setNotice(t("features.today.checkedInLate", { minutes: fmtMinutes(data.late_minutes) }));
       }
       // Mandatory sleep question — blocking dialog, the only way out is answering.
       if (data.sleep_prompt_id) setSleepPromptId(Number(data.sleep_prompt_id));
@@ -117,7 +119,7 @@ export function TodayPage() {
     onSuccess: (data) => {
       qc.invalidateQueries({ queryKey: ["attendance"] });
       if (typeof data.early_checkout_minutes === "number" && data.early_checkout_minutes > 0) {
-        setNotice(`You checked out ${fmtMinutes(data.early_checkout_minutes)} early.`);
+        setNotice(t("features.today.checkedOutEarly", { minutes: fmtMinutes(data.early_checkout_minutes) }));
       }
     },
     onError: (e) => {
@@ -145,31 +147,41 @@ export function TodayPage() {
 
   return (
     <div>
-      <h1 className="text-xl font-semibold">Hi{me.data?.full_name ? `, ${me.data.full_name.split(" ")[0]}` : ""}</h1>
+      <h1 className="text-xl font-semibold">
+        {me.data?.full_name
+          ? t("features.today.greetingWithName", { name: me.data.full_name.split(" ")[0] })
+          : t("features.today.greeting")}
+      </h1>
       <p className="mt-1 text-sm text-muted-foreground">
-        {now.toLocaleDateString("en", { weekday: "long", month: "long", day: "numeric" })}
+        {now.toLocaleDateString(i18n.language, { weekday: "long", month: "long", day: "numeric" })}
       </p>
 
       {/* Live clock + shift window */}
       <Card className="mt-4">
         <CardContent className="flex flex-col items-center py-6">
           <p className="font-display text-5xl font-semibold text-espresso tabular">
-            {now.toLocaleTimeString("en", { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+            {now.toLocaleTimeString(i18n.language, { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
           </p>
           <QueryBoundary query={shift}>
             {(s) => s.job_type === "part_time" ? (
-              <p className="mt-2 text-xs text-muted-foreground">Flexible hours — no fixed shift window</p>
+              <p className="mt-2 text-xs text-muted-foreground">{t("features.today.flexibleHoursNote")}</p>
             ) : (
               <div className="mt-2 text-center">
                 <p className="text-xs text-muted-foreground">
-                  Shift: {s.shift_start_local} – {s.shift_end_local} ({fmtTimezone(s.employee_timezone)})
+                  {t("features.today.shiftWindow", {
+                    start: s.shift_start_local, end: s.shift_end_local, tz: fmtTimezone(s.employee_timezone),
+                  })}
                 </p>
                 {status.data?.checked_in
                   ? s.minutes_until_end !== null && s.minutes_until_end > 0 && (
-                      <p className="mt-1 text-[13px] font-medium">{fmtMinutes(s.minutes_until_end)} left in your shift</p>
+                      <p className="mt-1 text-[13px] font-medium">
+                        {t("features.today.minutesLeftInShift", { time: fmtMinutes(s.minutes_until_end) })}
+                      </p>
                     )
                   : s.minutes_until_start !== null && s.minutes_until_start > 0 && (
-                      <p className="mt-1 text-[13px] font-medium">Shift starts in {fmtMinutes(s.minutes_until_start)}</p>
+                      <p className="mt-1 text-[13px] font-medium">
+                        {t("features.today.shiftStartsIn", { time: fmtMinutes(s.minutes_until_start) })}
+                      </p>
                     )}
               </div>
             )}
@@ -186,46 +198,46 @@ export function TodayPage() {
                 {data.checked_in ? (
                   <>
                     <div className="flex items-center justify-between">
-                      <p className="font-display text-lg font-semibold text-espresso">On the clock</p>
+                      <p className="font-display text-lg font-semibold text-espresso">{t("features.today.onTheClock")}</p>
                       <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
                     </div>
                     <p className="mt-1 text-[13px] text-muted-foreground">
-                      since {data.check_in_at ? fmtClock(data.check_in_at) : "…"}
+                      {t("features.today.since", { time: data.check_in_at ? fmtClock(data.check_in_at) : "…" })}
                     </p>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {!isPartTime && shift.data?.is_late ? (
-                        <Badge variant="destructive">{fmtMinutes(shift.data.minutes_late ?? 0)} late</Badge>
+                        <Badge variant="destructive">{t("features.today.lateBadge", { minutes: fmtMinutes(shift.data.minutes_late ?? 0) })}</Badge>
                       ) : !isPartTime && shift.data?.is_late === false ? (
-                        <Badge variant="success">on time</Badge>
+                        <Badge variant="success">{t("features.today.onTimeBadge")}</Badge>
                       ) : null}
                     </div>
                     <Button className="mt-4 w-full" disabled={checkOut.isPending} onClick={() => checkOut.mutate()}>
-                      {checkOut.isPending ? "Checking out…" : "Check out"}
+                      {checkOut.isPending ? t("features.today.checkingOut") : t("features.today.checkOut")}
                     </Button>
                     <p className="mt-2 text-xs text-muted-foreground">
-                      Checking out asks for today's report first if you haven't submitted one.
+                      {t("features.today.checkoutReportNote")}
                     </p>
                   </>
                 ) : (
                   <>
-                    <p className="font-display text-lg font-semibold">Off the clock</p>
+                    <p className="font-display text-lg font-semibold">{t("features.today.offTheClock")}</p>
                     <p className="mt-1 text-[13px] text-muted-foreground">
                       {data.report_submitted_today
-                        ? "Today's report is already submitted — see you tomorrow."
+                        ? t("features.today.reportAlreadySubmitted")
                         : isPartTime
-                          ? "Checking in starts your attendance session. You can check in once per day."
+                          ? t("features.today.partTimeCheckInNote")
                           : shiftEnded
-                            ? "Today's shift has already ended — check-in is no longer available for today."
+                            ? t("features.today.shiftEndedNote")
                             : tooEarlyToCheckIn
-                              ? `Check-in opens 15 minutes before your shift — ${fmtMinutes((shift.data?.minutes_until_start ?? 0) - 15)} to go.`
-                              : "Checking in starts your attendance session."}
+                              ? t("features.today.tooEarlyNote", { time: fmtMinutes((shift.data?.minutes_until_start ?? 0) - 15) })
+                              : t("features.today.checkInStartsSessionNote")}
                     </p>
                     <Button
                       className="mt-4 w-full"
                       disabled={data.report_submitted_today || tooEarlyToCheckIn || shiftEnded || checkIn.isPending}
                       onClick={() => checkIn.mutate()}
                     >
-                      {checkIn.isPending ? "Checking in…" : "Check in"}
+                      {checkIn.isPending ? t("features.today.checkingIn") : t("features.today.checkIn")}
                     </Button>
                   </>
                 )}
@@ -239,30 +251,30 @@ export function TodayPage() {
                   {data.on_break ? (
                     <>
                       <div className="flex items-center justify-between">
-                        <p className="font-display text-lg font-semibold">On break</p>
-                        <Badge variant="warning">on break</Badge>
+                        <p className="font-display text-lg font-semibold">{t("features.today.onBreak")}</p>
+                        <Badge variant="warning">{t("features.today.onBreakBadge")}</Badge>
                       </div>
                       <p className="mt-1 font-display text-3xl font-semibold tabular">
                         {data.break_started_at ? fmtElapsed(now, new Date(data.break_started_at)) : "00:00"}
                       </p>
                       <Button className="mt-4 w-full" disabled={endBreak.isPending} onClick={() => endBreak.mutate()}>
-                        End break
+                        {t("features.today.endBreak")}
                       </Button>
                     </>
                   ) : (
                     <>
                       <div className="flex items-center justify-between">
-                        <p className="text-sm font-medium">Break time</p>
+                        <p className="text-sm font-medium">{t("features.today.breakTime")}</p>
                         <p className="text-[13px] text-muted-foreground">
                           {data.total_break_minutes_today > 0
-                            ? `${fmtMinutes(data.total_break_minutes_today)} today`
-                            : "none yet today"}
+                            ? t("features.today.breakMinutesToday", { time: fmtMinutes(data.total_break_minutes_today) })
+                            : t("features.today.noBreakYetToday")}
                         </p>
                       </div>
                       <Button variant="outline" className="mt-4 w-full" disabled={startBreak.isPending} onClick={() => startBreak.mutate()}>
-                        Start break
+                        {t("features.today.startBreak")}
                       </Button>
-                      <p className="mt-2 text-xs text-muted-foreground">Break time is excluded from your credited hours.</p>
+                      <p className="mt-2 text-xs text-muted-foreground">{t("features.today.breakExcludedNote")}</p>
                     </>
                   )}
                 </CardContent>
@@ -276,7 +288,7 @@ export function TodayPage() {
         <Card className="mt-3 flex-row items-center justify-between bg-[#dcebd9]">
           <CardContent className="flex items-center justify-between px-4 py-3">
             <p className="flex-1 text-[13px] text-emerald-800">{notice}</p>
-            <button className="pl-3 text-sm font-semibold text-emerald-800" onClick={() => setNotice(null)} aria-label="Dismiss">
+            <button className="pl-3 text-sm font-semibold text-emerald-800" onClick={() => setNotice(null)} aria-label={t("features.today.dismiss")}>
               ✕
             </button>
           </CardContent>
@@ -285,10 +297,10 @@ export function TodayPage() {
       {error && <ErrorText>{error}</ErrorText>}
 
       <div className="mt-5 flex flex-wrap gap-2">
-        <QuickLink to="/portal/leave" label="Leave" />
-        <QuickLink to="/portal/overtime" label="Overtime" />
-        <QuickLink to="/portal/settings?tab=attendance" label="History" />
-        <QuickLink to="/portal/settings?tab=kudos" label="Kudos" />
+        <QuickLink to="/portal/leave" label={t("features.today.quickLinks.leave")} />
+        <QuickLink to="/portal/overtime" label={t("features.today.quickLinks.overtime")} />
+        <QuickLink to="/portal/settings?tab=attendance" label={t("features.today.quickLinks.history")} />
+        <QuickLink to="/portal/settings?tab=kudos" label={t("features.today.quickLinks.kudos")} />
       </div>
 
       <WeekSummary reports={reports.data ?? []} kudosCount={kudos.data?.length ?? 0} />
@@ -326,6 +338,7 @@ function QuickLink({ to, label }: { to: string; label: string }) {
 
 /** Same client-side computation as mobile — from already-fetched data. */
 function WeekSummary({ reports, kudosCount }: { reports: Report[]; kudosCount: number }) {
+  const { t } = useTranslation();
   const stats = useMemo(() => {
     const weekAgo = Date.now() - 7 * DAY_MS;
     const thisWeek = reports.filter((r) => new Date(r.report_date).getTime() >= weekAgo);
@@ -339,12 +352,12 @@ function WeekSummary({ reports, kudosCount }: { reports: Report[]; kudosCount: n
 
   return (
     <>
-      <SectionTitle>This week</SectionTitle>
+      <SectionTitle>{t("features.today.thisWeek")}</SectionTitle>
       <div className="grid gap-2 sm:grid-cols-2">
-        <StatRow label="Reports submitted" value={String(stats.reportsThisWeek)} />
-        <StatRow label="Hours logged" value={`${stats.hoursThisWeek}h`} />
-        <StatRow label="Average per day" value={`${stats.avgHoursPerDay}h`} />
-        <StatRow label="Kudos received" value={String(kudosCount)} />
+        <StatRow label={t("features.today.reportsSubmitted")} value={String(stats.reportsThisWeek)} />
+        <StatRow label={t("features.today.hoursLogged")} value={`${stats.hoursThisWeek}h`} />
+        <StatRow label={t("features.today.averagePerDay")} value={`${stats.avgHoursPerDay}h`} />
+        <StatRow label={t("features.today.kudosReceived")} value={String(kudosCount)} />
       </div>
     </>
   );

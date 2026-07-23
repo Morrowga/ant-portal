@@ -1,0 +1,399 @@
+{
+  "common": {
+    "signOut": "サインアウト",
+    "accountMenu": "アカウントメニュー",
+    "employeePortal": "従業員ポータル"
+  },
+  "nav": {
+    "today": "今日",
+    "reports": "レポート",
+    "health": "健康",
+    "knowledge": "ナレッジ",
+    "leave": "休暇",
+    "overtime": "残業",
+    "settings": "設定"
+  },
+  "shell": {
+    "notificationsAriaLabel": "Notifications, {{count}} unread"
+  },
+  "settings": {
+    "pageTitle": "設定",
+    "tabs": {
+      "certificates": "証明書",
+      "kudos": "称賛",
+      "attendance": "出勤",
+      "invoices": "請求書",
+      "feedback": "フィードバック",
+      "language": "言語"
+    },
+    "certificates": {
+      "description": "毎月・毎年末に自動発行される、あなたの実績の携帯可能な記録です。承認は不要です。",
+      "empty": "最初の証明書は今月末に届きます。",
+      "monthlyCertificate": "月次証明書",
+      "yearlyCertificate": "年次証明書",
+      "downloadPdf": "PDFをダウンロード",
+      "generating": "生成中"
+    },
+    "kudos": {
+      "description": "マネージャーからもらった称賛です。インパクトスコアにも反映されます。",
+      "empty": "まだ称賛はありません — 届いたらここに表示されます。"
+    },
+    "attendance": {
+      "empty": "出勤記録がまだありません。",
+      "open": "オープン"
+    },
+    "invoices": {
+      "description": "会社が給与期間ごとに生成します。タップすると詳細を確認してダウンロードできます。",
+      "empty": "まだ請求書はありません — 会社が給与期間の請求書を生成すると表示されます。",
+      "actual": "実績",
+      "scheduled": "予定"
+    },
+    "feedback": {
+      "harassmentNote": "ハラスメント報告は会社のオーナーにのみ直接届きます — マネージャーには表示されません。",
+      "messagePlaceholder": "何が起きていますか？差し支えない範囲で具体的にお書きください。",
+      "submitAnonymously": "匿名で送信",
+      "anonymousNote": "あなたの名前は一切添付されません — オーナーにも分かりません。",
+      "sending": "送信中…",
+      "send": "フィードバックを送信",
+      "yourTickets": "あなたのチケット",
+      "noneRaised": "まだ何も提出されていません。",
+      "submittedAnonymously": "匿名で送信済み",
+      "categories": {
+        "workload": "業務量",
+        "workplace": "職場環境",
+        "management": "マネジメント",
+        "harassment": "ハラスメント",
+        "other": "その他"
+      }
+    },
+    "language": {
+      "title": "表示言語",
+      "description": "言語は会社が設定しますが、いつでも英語に切り替えることができます。",
+      "useEnglish": "英語を使用",
+      "toggleOffHint": "オフにすると{{language}}に切り替わります。",
+      "toggleOffHintNoAssigned": "会社がまだ言語を設定していません — この設定は無効です。",
+      "names": {
+        "en": "英語",
+        "ja": "日本語",
+        "ko": "韓国語",
+        "zh": "中国語",
+        "hi": "ヒンディー語"
+      }
+    }
+  },
+  "features": {
+    "today": {
+    "greeting": "こんにちは",
+    "greetingWithName": "こんにちは、{{name}}さん",
+    "onTheClock": "勤務中",
+    "since": "{{time}}から",
+    "lateBadge": "{{minutes}}遅刻",
+    "onTimeBadge": "定刻",
+    "checkOut": "退勤",
+    "checkingOut": "退勤中…",
+    "checkoutReportNote": "退勤前に本日のレポートが未提出の場合、先に提出が求められます。",
+    "offTheClock": "勤務外",
+    "reportAlreadySubmitted": "本日のレポートはすでに提出済みです — また明日。",
+    "partTimeCheckInNote": "出勤すると勤怠セッションが開始されます。1日1回のみチェックインできます。",
+    "shiftEndedNote": "本日のシフトはすでに終了しました — 本日のチェックインはできません。",
+    "tooEarlyNote": "チェックインはシフト開始15分前から可能です — あと{{time}}です。",
+    "checkInStartsSessionNote": "チェックインすると勤怠セッションが開始されます。",
+    "checkIn": "出勤",
+    "checkingIn": "出勤中…",
+    "flexibleHoursNote": "フレックスタイム — 固定シフトなし",
+    "shiftWindow": "シフト: {{start}} – {{end}} ({{tz}})",
+    "minutesLeftInShift": "シフト残り{{time}}",
+    "shiftStartsIn": "シフト開始まで{{time}}",
+    "onBreak": "休憩中",
+    "onBreakBadge": "休憩中",
+    "endBreak": "休憩終了",
+    "breakTime": "休憩時間",
+    "breakMinutesToday": "本日{{time}}",
+    "noBreakYetToday": "本日まだなし",
+    "startBreak": "休憩開始",
+    "breakExcludedNote": "休憩時間は勤務時間から除外されます。",
+    "checkedInLate": "{{minutes}}遅れて出勤しました。",
+    "checkedOutEarly": "{{minutes}}早く退勤しました。",
+    "dismiss": "閉じる",
+    "quickLinks": {
+        "leave": "休暇",
+        "overtime": "残業",
+        "history": "履歴",
+        "kudos": "称賛"
+    },
+    "thisWeek": "今週",
+    "reportsSubmitted": "提出済みレポート",
+    "hoursLogged": "記録時間",
+    "averagePerDay": "1日平均",
+    "kudosReceived": "受け取った称賛"
+    },
+    "reports": {
+        "pageTitle": "あなたのレポート",
+        "pageDescription": "日々の業務内容です。レポートは深夜0時にロックされます — 編集は当日のみ可能です。",
+        "tabs": {
+        "daily": "日次レポート",
+        "overtime": "残業"
+        },
+        "daily": {
+        "empty": "まだレポートはありません — 最初のレポートは「今日」画面での退勤時に作成されます。",
+        "editableToday": "本日編集可能",
+        "locked": "ロック済み"
+        },
+        "overtime": {
+        "empty": "まだ残業記録はありません。",
+        "closed": "終了",
+        "inProgress": "進行中",
+        "noSummaryYet": "まだサマリーなし"
+        }
+    },
+    "reportDetail": {
+        "reports": "レポート",
+        "edit": "編集",
+        "delete": "削除",
+        "lockedNote": "ロック済み — レポートは作成当日のみ編集できます。マネージャーはコメントを追加できます。",
+        "workdayPace": "業務ペース",
+        "paceUnavailable": "このレポートではペース分析を利用できません — Midプラン以上の会社では、提出後しばらくすると表示されます。",
+        "managerComments": "マネージャーのコメント",
+        "noComments": "まだコメントはありません。",
+        "hoursAriaLabel": "時間",
+        "saveChanges": "変更を保存"
+    },
+    "newReport": {
+        "finishCheckingOut": "退勤を完了する",
+        "newReport": "新しいレポート",
+        "answerHealthFirst": "先に健康チェックインに回答してください",
+        "multiplePending": "本日{{count}}件の未回答チェックインがあります。",
+        "singlePending": "簡単な質問が1つあります。回答するとレポートフォームが表示されます。",
+        "answerNow": "今すぐ回答",
+        "actualWorkedNote": "本日の実際の勤務時間は{{time}}です（休憩除く）。以下にタスクを記録してください — 合計はこの時間以下にしてください。",
+        "fillOutToFinish": "退勤を完了するには本日のレポートを記入してください。",
+        "entryNumber": "項目{{number}}",
+        "project": "プロジェクト",
+        "timeSpent": "所要時間",
+        "hoursAriaLabel": "時間",
+        "hoursUnit": "時間",
+        "minutesAriaLabel": "分",
+        "minutesUnit": "分",
+        "whatDidYouWorkOn": "何に取り組みましたか？",
+        "summaryPlaceholder": "数文でまとめてください — マネージャーとペース分析が読みます。",
+        "overCeiling": "入力合計（{{entered}}）が実際の勤務時間（{{actual}}）を超えています。入力内容を調整してください。",
+        "todayInvoice": "本日の請求",
+        "addAnotherEntry": "項目を追加",
+        "submitting": "送信中…",
+        "submitAndCheckOut": "提出して退勤",
+        "submitReport": "レポートを提出",
+        "nothingToReport": "本日報告事項なし",
+        "invoiceDialog": {
+            "title": "本日の請求",
+            "loading": "読み込み中…",
+            "scheduledShift": "予定シフト",
+            "timeCheckedIn": "チェックイン時間",
+            "breakTimeExcluded": "休憩時間（除外）",
+            "lateArrival": "遅刻",
+            "none": "なし",
+            "unansweredPresenceChecks": "未回答の在席確認",
+            "deductionsOffNote": "無応答による控除は会社によって無効化されています。",
+            "creditedHours": "算定時間"
+        }
+    },
+    "health": {
+        "pageTitle": "あなたの健康",
+        "pageDescription": "これはあなただけが見ることができます。会社が見るのは匿名のチーム平均のみで、個人の入力は見られません。",
+        "reminders": "リマインダー",
+        "allCaughtUp": "すべて完了 — 現在待機中のものはありません。",
+        "clickToAnswer": "クリックして今すぐ回答",
+        "unanswered": "未回答",
+        "answered": "回答済み",
+        "todaysCheckins": "本日のチェックイン",
+        "noRemindersSentYet": "本日はまだリマインダーが送信されていません — チェックイン後に表示されます。",
+        "thisWeek": "今週",
+        "avgWaterPerDay": "1日平均水分量",
+        "avgMood": "平均気分",
+        "avgSleepPerDay": "1日平均睡眠時間",
+        "mlValue": "{{value}} ml",
+        "moodValue": "{{value}} / 5",
+        "hoursValue": "{{value}} 時間",
+        "promptTypes": {
+            "sleepCheckin": "睡眠チェックイン",
+            "moodWaterCheckin": "気分・水分チェックイン"
+        }
+    },
+    "healthCheckin": {
+        "logged": "記録しました！",
+        "sleepQuestion": "昨夜は何時間眠りましたか？",
+        "sleepPrivacyNote": "あなただけが見ることができます — マネージャーや会社と共有されることはありません。",
+        "requiredToContinue": "続けるにはこの質問への回答が必要です。",
+        "saving": "保存中…",
+        "sleepOptions": {
+        "lessThan5": "5時間未満",
+        "fiveToSix": "5〜6時間",
+        "sixToSeven": "6〜7時間",
+        "sevenToEight": "7〜8時間",
+        "eightPlus": "8時間以上"
+        },
+        "thanksLogged": "ありがとう — 記録しました！",
+        "quickCheckin": "クイックチェックイン",
+        "twoQuestionsNote": "2つの簡単な質問 — 数秒で完了します。",
+        "waterQuestion": "今日どのくらい水を飲みましたか？",
+        "mlValue": "{{value}}ml",
+        "moodQuestion": "今の気分はどうですか？",
+        "moodOptions": {
+        "great": "最高",
+        "good": "良い",
+        "okay": "普通",
+        "low": "低め",
+        "rough": "つらい"
+        },
+        "submit": "送信"
+    },
+    "knowledge": {
+        "pageTitle": "ナレッジ＆共有",
+        "knowledgeDescription": "会社のノウハウとお知らせです。必読事項は確認が必要です。",
+        "sharingDescription": "誰でも投稿できるオープンな掲示板 — 会社全員がコメントできます。",
+        "newPost": "新しい投稿",
+        "tabs": {
+        "knowledge": "ナレッジ",
+        "sharing": "共有"
+        },
+        "searchPlaceholder": "投稿を検索…",
+        "noPostsFound": "投稿が見つかりません。",
+        "noSharingPostsYet": "まだ共有投稿はありません — 最初の投稿をしましょう。",
+        "mustRead": "必読"
+    },
+    "knowledgeNew": {
+        "knowledgeAndSharing": "ナレッジ＆共有",
+        "newPost": "新しい投稿",
+        "type": "種類",
+        "knowledgeHint": "会社のノウハウ — 投稿は会社の設定によって制限される場合があります。",
+        "sharingHint": "誰でも投稿可能 — カテゴリーなし、会社全員がコメントできる投稿です。",
+        "titleLabel": "タイトル",
+        "titlePlaceholder": "共有する価値のある何か",
+        "bodyLabel": "本文",
+        "bodyPlaceholder": "新しいチームメンバーに説明するように書いてください。リンクはクリック可能になります。",
+        "publishing": "公開中…",
+        "publish": "公開"
+    },
+    "knowledgePost": {
+        "comments": "コメント（{{count}}）",
+        "noComments": "まだコメントはありません — 最初に返信しましょう。",
+        "you": "あなた",
+        "someone": "誰か",
+        "author": "投稿者",
+        "commentPlaceholder": "コメントや提案を追加…",
+        "postComment": "コメントを投稿",
+        "acknowledged": "確認済み ✓",
+        "mustReadNote": "これは必読です。読み終えたら確認してください — 誰が確認したか会社に表示されます。",
+        "iveReadThis": "読みました"
+    },
+    "leave": {
+        "pageTitle": "休暇",
+        "requestLeave": "休暇を申請",
+        "partialDayQuestion": "半日以下の申請ですか？",
+        "partialDayExample": "例：銀行の用事で2時間",
+        "date": "日付",
+        "from": "開始",
+        "until": "終了",
+        "firstDay": "初日",
+        "lastDay": "最終日",
+        "endTimeError": "終了時刻は開始時刻より後にしてください。",
+        "sending": "送信中…",
+        "sendRequest": "申請を送信",
+        "yourRequests": "あなたの申請",
+        "empty": "まだ休暇申請はありません。",
+        "types": {
+            "annual": "年次有給",
+            "sick": "病気休暇",
+            "unpaid": "無給休暇",
+            "other": "その他"
+        },
+        "statuses": {
+            "pending": "審査中",
+            "approved": "承認済み",
+            "rejected": "却下"
+        }
+    },
+    "overtime": {
+        "pageTitle": "残業",
+        "pageDescription": "残業は開始前に申請と承認が必要で、終了時には短い報告が必要です。",
+        "running": "残業中",
+        "since": "{{time}}から",
+        "reasonLabel": "理由: {{reason}}",
+        "closingSummaryLabel": "この残業で何をしましたか？（セッション終了に必須）",
+        "closingSummaryPlaceholder": "短い終了レポート — これは任意ではなく必須です。",
+        "closing": "終了中…",
+        "submitAndEnd": "レポートを提出して残業を終了",
+        "approvedForToday": "本日承認済み",
+        "unlocksAt": "{{time}}に開始 — その時間になるとボタンが有効になります。",
+        "starting": "開始中…",
+        "startOvertime": "残業を開始",
+        "noApprovedToday": "本日承認済みの残業はありません",
+        "submitBelowNote": "本日を含む任意の日に申請を提出してください — マネージャーが承認してから開始できます。",
+        "requestOvertime": "残業を申請",
+        "alreadyHaveApproved": "本日の承認済み申請がすでにあります",
+        "alreadyHavePending": "本日の審査中申請がすでにあります",
+        "tabs": {
+            "requests": "あなたの申請",
+            "sessions": "過去のセッション"
+        },
+        "noRequestsYet": "まだ残業申請はありません。",
+        "nextDay": "（翌日）",
+        "loading": "読み込み中…",
+        "noClosedSessions": "まだ終了した残業セッションはありません。",
+        "loadMore": "さらに読み込む",
+        "date": "日付",
+        "startTime": "開始時刻",
+        "endTime": "終了時刻",
+        "identicalTimeError": "開始時刻と終了時刻を同じにすることはできません。",
+        "spansNextDayNote": "翌日にまたがります — {{date}}の翌日{{time}}に終了します。",
+        "selectedDate": "選択した日付",
+        "whyNeedOvertime": "残業が必要な理由は？",
+        "reasonPlaceholder": "例：明日の締め切りまでにQ3レポートを完了するため",
+        "sending": "送信中…",
+        "sendRequest": "申請を送信",
+        "statuses": {
+            "pending": "審査中",
+            "approved": "承認済み",
+            "rejected": "却下"
+        }
+    },
+    "overtimeDetail": {
+        "overtime": "残業",
+        "closed": "終了",
+        "inProgress": "進行中",
+        "ended": "{{time}}に終了",
+        "stillRunning": "まだ実行中",
+        "initiatedBy": "{{who}}が開始",
+        "reason": "理由",
+        "closingSummary": "終了レポート",
+        "noSummaryRecorded": "サマリーが記録されていません。",
+        "notClosedYet": "まだ終了していません — セッションを終了するにはサマリーが必要です。",
+        "aiSummary": "AIサマリー"
+    },
+    "notifications": {
+        "pageTitle": "通知",
+        "empty": "通知はありません。"
+    },
+    "onboardingConsent": {
+      "title": "始める前に",
+      "subtitle": "それぞれ個別に選択できます。すべてなしでも作業できます。",
+      "saving": "保存中…",
+      "saveChoices": "選択を保存",
+      "items": {
+        "healthTitle": "個人の健康トラッキング",
+        "healthBody": "水分摂取、気分、休憩、歩数、睡眠 — 閲覧できるのはご本人のみです。管理者や会社は個人の記録を見ることはできません。チームには3人以上の匿名平均のみが表示されます。",
+        "notificationsTitle": "通知",
+        "notificationsBody": "チェックイン、日報提出、休憩、会社からのお知らせのリマインダー。"
+      }
+    },
+    "onboardingChecklist": {
+      "title": "最初のステップ",
+      "subtitle": "会社が新入社員のために設定しました。完了したらチェックしてください — このリストはプロフィールに保存されます。",
+      "empty": "チェック項目はありません — 準備完了です。",
+      "done": "完了",
+      "required": "必須",
+      "optional": "任意",
+      "finishing": "完了処理中…",
+      "takeMeToApp": "アプリへ移動"
+    }
+  }
+}

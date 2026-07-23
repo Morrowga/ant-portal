@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Bell, LogOut, UserRound } from "lucide-react";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 import { api } from "@/lib/api-client";
@@ -15,19 +17,23 @@ import {
 } from "@/components/ui/dropdown-menu";
 import logo from "@/assets/logo.png";
 
+/** labelKey resolves under nav.* -- actual display text comes from i18n,
+ * not hardcoded here, so it follows whatever language PortalShell syncs
+ * to below once GET /me resolves. */
 const NAV = [
-  { to: "/portal", label: "Today", end: true },
-  { to: "/portal/reports", label: "Reports" },
-  { to: "/portal/health", label: "Health" },
-  { to: "/portal/knowledge", label: "Knowledge" },
-  { to: "/portal/leave", label: "Leave" },
-  { to: "/portal/overtime", label: "Overtime" },
-  { to: "/portal/settings", label: "Settings" },
+  { to: "/portal", labelKey: "today", end: true },
+  { to: "/portal/reports", labelKey: "reports" },
+  { to: "/portal/health", labelKey: "health" },
+  { to: "/portal/knowledge", labelKey: "knowledge" },
+  { to: "/portal/leave", labelKey: "leave" },
+  { to: "/portal/overtime", labelKey: "overtime" },
+  { to: "/portal/settings", labelKey: "settings" },
 ];
 
 /** Simple top-nav layout — deliberately NOT the dashboard's AppShell
  *  sidebar, which is built around Owner/Manager navigation. */
 export function PortalShell() {
+  const { t, i18n } = useTranslation();
   const { logout } = useAuth();
   const navigate = useNavigate();
   const me = useQuery({
@@ -42,6 +48,17 @@ export function PortalShell() {
     refetchInterval: 60_000,
   });
   const unread = (notifications.data ?? []).filter((n) => !n.read_at).length;
+
+  /** Sync the active i18n language to whatever this employee is actually
+   * assigned once /me resolves. This is the ONLY place the portal decides
+   * its display language on load -- everywhere else (Settings' toggle)
+   * just changes it going forward from here. Guarded by a language
+   * mismatch check so this doesn't re-trigger every refetch. */
+  useEffect(() => {
+    if (me.data?.language && me.data.language !== i18n.language) {
+      i18n.changeLanguage(me.data.language);
+    }
+  }, [me.data?.language, i18n]);
 
   return (
     <div className="min-h-screen">
@@ -67,7 +84,7 @@ export function PortalShell() {
                     )
                   }
                 >
-                  {item.label}
+                  {t(`nav.${item.labelKey}`)}
                 </NavLink>
               ))}
             </nav>
@@ -75,7 +92,7 @@ export function PortalShell() {
           <div className="flex items-center gap-1">
             <Button
               variant="ghost" size="icon" className="relative text-latte hover:bg-white/10 hover:text-white"
-              aria-label={`Notifications, ${unread} unread`}
+              aria-label={t("shell.notificationsAriaLabel", { count: unread })}
               onClick={() => navigate("/portal/notifications")}
             >
               <Bell className="h-4 w-4" />
@@ -85,15 +102,15 @@ export function PortalShell() {
             </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-latte hover:bg-white/10 hover:text-white" aria-label="Account menu">
+                <Button variant="ghost" size="icon" className="text-latte hover:bg-white/10 hover:text-white" aria-label={t("common.accountMenu")}>
                   <UserRound className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuLabel>{me.data?.full_name ?? me.data?.email ?? "Employee portal"}</DropdownMenuLabel>
+                <DropdownMenuLabel>{me.data?.full_name ?? me.data?.email ?? t("common.employeePortal")}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={logout}>
-                  <LogOut className="h-4 w-4" /> Sign out
+                  <LogOut className="h-4 w-4" /> {t("common.signOut")}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -113,7 +130,7 @@ export function PortalShell() {
                 )
               }
             >
-              {item.label}
+              {t(`nav.${item.labelKey}`)}
             </NavLink>
           ))}
         </nav>

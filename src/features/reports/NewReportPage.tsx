@@ -12,6 +12,7 @@
  */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { api, errorDetail } from "@/lib/api-client";
@@ -32,6 +33,7 @@ import { MoodWaterCheckinDialog, SleepCheckinDialog } from "@/features/health/ch
 interface Entry { project_id: number | null; hours: string; minutes: string; summary: string }
 
 export function NewReportPage() {
+  const { t } = useTranslation();
   const [params] = useSearchParams();
   const isForCheckout = params.get("forCheckout") === "1" || params.get("forCheckout") === "true";
   const navigate = useNavigate();
@@ -101,7 +103,7 @@ export function NewReportPage() {
 
   return (
     <div className="mx-auto max-w-xl">
-      <h1 className="text-xl font-semibold">{isForCheckout ? "Finish checking out" : "New report"}</h1>
+      <h1 className="text-xl font-semibold">{isForCheckout ? t("features.newReport.finishCheckingOut") : t("features.newReport.newReport")}</h1>
 
       <QueryBoundary query={pending}>
         {(prompts) =>
@@ -110,13 +112,13 @@ export function NewReportPage() {
             // pending check-in is answered; the dialog opens right here.
             <Card className="mt-4">
               <CardContent className="flex flex-col items-center py-8 text-center">
-                <p className="font-display text-lg font-semibold">Answer your health check-in first</p>
+                <p className="font-display text-lg font-semibold">{t("features.newReport.answerHealthFirst")}</p>
                 <p className="mt-2 text-[13px] text-muted-foreground">
                   {prompts.length > 1
-                    ? `You have ${prompts.length} unanswered check-ins today.`
-                    : "Just one quick question, then the report form appears right here."}
+                    ? t("features.newReport.multiplePending", { count: prompts.length })
+                    : t("features.newReport.singlePending")}
                 </p>
-                <Button className="mt-4" onClick={() => setAnswering(prompts[0])}>Answer now</Button>
+                <Button className="mt-4" onClick={() => setAnswering(prompts[0])}>{t("features.newReport.answerNow")}</Button>
               </CardContent>
             </Card>
           ) : (
@@ -126,8 +128,8 @@ export function NewReportPage() {
                   <CardContent className="px-4 py-3">
                     <p className="text-[13px] font-medium text-espresso">
                       {actualMinutes !== null
-                        ? `You've actually worked ${fmtMinutes(actualMinutes)} today (breaks excluded). Log your tasks below — the total can be less, but not more.`
-                        : "Fill out today's report to finish checking out."}
+                        ? t("features.newReport.actualWorkedNote", { time: fmtMinutes(actualMinutes) })
+                        : t("features.newReport.fillOutToFinish")}
                     </p>
                   </CardContent>
                 </Card>
@@ -137,9 +139,9 @@ export function NewReportPage() {
                 <Card key={i} className="mt-3">
                   <CardContent className="p-4">
                     <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                      Entry {i + 1}
+                      {t("features.newReport.entryNumber", { number: i + 1 })}
                     </p>
-                    <Label className="mb-1.5 block">Project</Label>
+                    <Label className="mb-1.5 block">{t("features.newReport.project")}</Label>
                     <div className="mb-3 flex flex-wrap gap-2">
                       {(projects.data ?? []).map((project) => (
                         <Chip
@@ -150,7 +152,7 @@ export function NewReportPage() {
                         />
                       ))}
                     </div>
-                    <Label className="mb-1.5 block">Time spent</Label>
+                    <Label className="mb-1.5 block">{t("features.newReport.timeSpent")}</Label>
                     <div className="mb-3 flex gap-2">
                       <div className="flex-1">
                         <Input
@@ -158,9 +160,9 @@ export function NewReportPage() {
                           value={entry.hours}
                           onChange={(e) => update(i, { hours: e.target.value.replace(/[^0-9]/g, "") })}
                           placeholder="0"
-                          aria-label="Hours"
+                          aria-label={t("features.newReport.hoursAriaLabel")}
                         />
-                        <p className="mt-1 text-center text-[11px] text-muted-foreground">hours</p>
+                        <p className="mt-1 text-center text-[11px] text-muted-foreground">{t("features.newReport.hoursUnit")}</p>
                       </div>
                       <div className="flex-1">
                         <Input
@@ -171,17 +173,17 @@ export function NewReportPage() {
                             update(i, { minutes: digits === "" ? "" : String(Math.min(59, Number(digits))) });
                           }}
                           placeholder="0"
-                          aria-label="Minutes"
+                          aria-label={t("features.newReport.minutesAriaLabel")}
                         />
-                        <p className="mt-1 text-center text-[11px] text-muted-foreground">minutes</p>
+                        <p className="mt-1 text-center text-[11px] text-muted-foreground">{t("features.newReport.minutesUnit")}</p>
                       </div>
                     </div>
-                    <Label className="mb-1.5 block" htmlFor={`summary-${i}`}>What did you work on?</Label>
+                    <Label className="mb-1.5 block" htmlFor={`summary-${i}`}>{t("features.newReport.whatDidYouWorkOn")}</Label>
                     <Textarea
                       id={`summary-${i}`}
                       value={entry.summary}
                       onChange={(e) => update(i, { summary: e.target.value })}
-                      placeholder="A few sentences — this is what your manager (and the pace analysis) reads."
+                      placeholder={t("features.newReport.summaryPlaceholder")}
                     />
                   </CardContent>
                 </Card>
@@ -189,8 +191,10 @@ export function NewReportPage() {
 
               {overCeiling && (
                 <ErrorText>
-                  Total entered ({fmtMinutes(Math.round(totalEnteredHours * 60))}) is more than your actual working
-                  hours ({actualMinutes !== null ? fmtMinutes(actualMinutes) : "?"}). Reduce your entries to fit.
+                  {t("features.newReport.overCeiling", {
+                    entered: fmtMinutes(Math.round(totalEnteredHours * 60)),
+                    actual: actualMinutes !== null ? fmtMinutes(actualMinutes) : "?",
+                  })}
                 </ErrorText>
               )}
               {error && <ErrorText>{error}</ErrorText>}
@@ -198,25 +202,25 @@ export function NewReportPage() {
               <div className="mt-3 flex gap-2">
                 {isForCheckout && (
                   <Button variant="outline" className="flex-1" onClick={() => setInvoiceOpen(true)}>
-                    Today invoice
+                    {t("features.newReport.todayInvoice")}
                   </Button>
                 )}
                 <Button
                   variant="outline" className="flex-1"
                   onClick={() => setEntries((prev) => [...prev, { project_id: null, hours: "", minutes: "", summary: "" }])}
                 >
-                  Add another entry
+                  {t("features.newReport.addAnotherEntry")}
                 </Button>
               </div>
               <Button className="mt-3 w-full" disabled={!valid || submit.isPending} onClick={() => submit.mutate()}>
-                {submit.isPending ? "Submitting…" : isForCheckout ? "Submit & check out" : "Submit report"}
+                {submit.isPending ? t("features.newReport.submitting") : isForCheckout ? t("features.newReport.submitAndCheckOut") : t("features.newReport.submitReport")}
               </Button>
 
               {/* "Nothing to report" can't satisfy the checkout gate — hidden there. */}
               {!isForCheckout && (
                 <div className="mt-6 border-t pt-4 text-center">
                   <Button variant="ghost" disabled={nothingToReport.isPending} onClick={() => nothingToReport.mutate()}>
-                    Nothing to report today
+                    {t("features.newReport.nothingToReport")}
                   </Button>
                 </div>
               )}
@@ -244,29 +248,34 @@ export function NewReportPage() {
 function TodayInvoiceDialog({ open, onClose, invoice, loading }: {
   open: boolean; onClose: () => void; invoice: TodayInvoice | undefined; loading: boolean;
 }) {
+  const { t } = useTranslation();
   return (
     <Dialog open={open} onOpenChange={(next) => !next && onClose()}>
       <DialogContent className="max-w-md">
-        <DialogHeader><DialogTitle>Today's invoice</DialogTitle></DialogHeader>
+        <DialogHeader><DialogTitle>{t("features.newReport.invoiceDialog.title")}</DialogTitle></DialogHeader>
         {loading || !invoice ? (
-          <p className="text-sm text-muted-foreground">Loading…</p>
+          <p className="text-sm text-muted-foreground">{t("features.newReport.invoiceDialog.loading")}</p>
         ) : (
           <div>
-            <InvoiceRow label="Scheduled shift" value={fmtMinutes(invoice.scheduled_minutes)} />
-            <InvoiceRow label="Time checked in" value={fmtMinutes(invoice.elapsed_minutes)} />
-            <InvoiceRow label="Break time (excluded)" value={`− ${fmtMinutes(invoice.break_minutes)}`} muted />
-            <InvoiceRow label="Late arrival" value={invoice.late_minutes > 0 ? fmtMinutes(invoice.late_minutes) : "none"} muted />
+            <InvoiceRow label={t("features.newReport.invoiceDialog.scheduledShift")} value={fmtMinutes(invoice.scheduled_minutes)} />
+            <InvoiceRow label={t("features.newReport.invoiceDialog.timeCheckedIn")} value={fmtMinutes(invoice.elapsed_minutes)} />
+            <InvoiceRow label={t("features.newReport.invoiceDialog.breakTimeExcluded")} value={`− ${fmtMinutes(invoice.break_minutes)}`} muted />
+            <InvoiceRow
+              label={t("features.newReport.invoiceDialog.lateArrival")}
+              value={invoice.late_minutes > 0 ? fmtMinutes(invoice.late_minutes) : t("features.newReport.invoiceDialog.none")}
+              muted
+            />
             {invoice.deductions_enabled ? (
               <InvoiceRow
-                label="Unanswered presence checks"
-                value={invoice.no_response_minutes > 0 ? `− ${fmtMinutes(invoice.no_response_minutes)}` : "none"}
+                label={t("features.newReport.invoiceDialog.unansweredPresenceChecks")}
+                value={invoice.no_response_minutes > 0 ? `− ${fmtMinutes(invoice.no_response_minutes)}` : t("features.newReport.invoiceDialog.none")}
                 muted={invoice.no_response_minutes === 0}
               />
             ) : (
-              <p className="mt-1 text-xs text-muted-foreground">No-response deductions are turned off by your company.</p>
+              <p className="mt-1 text-xs text-muted-foreground">{t("features.newReport.invoiceDialog.deductionsOffNote")}</p>
             )}
             <div className="mt-3 border-t pt-3">
-              <InvoiceRow label="Credited hours" value={fmtMinutes(invoice.credited_minutes)} bold />
+              <InvoiceRow label={t("features.newReport.invoiceDialog.creditedHours")} value={fmtMinutes(invoice.credited_minutes)} bold />
             </div>
           </div>
         )}

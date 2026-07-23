@@ -3,6 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { api, errorDetail } from "@/lib/api-client";
@@ -17,6 +18,7 @@ import { ErrorText } from "@/components/shared/bits";
 import { QueryBoundary } from "@/components/shared/QueryBoundary";
 
 export function ReportDetailPage() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const qc = useQueryClient();
@@ -36,7 +38,7 @@ export function ReportDetailPage() {
   return (
     <div className="mx-auto max-w-xl">
       <Button variant="ghost" size="sm" asChild className="-ml-2 mb-3">
-        <Link to="/portal/reports"><ArrowLeft className="h-4 w-4" /> Reports</Link>
+        <Link to="/portal/reports"><ArrowLeft className="h-4 w-4" /> {t("features.reportDetail.reports")}</Link>
       </Button>
       <QueryBoundary query={report}>
         {(data) => {
@@ -61,19 +63,19 @@ export function ReportDetailPage() {
                   {!editing && (
                     <div className="mt-4 flex gap-2">
                       <Button variant="outline" className="flex-1" disabled={!editable} onClick={() => setEditing(true)}>
-                        Edit
+                        {t("features.reportDetail.edit")}
                       </Button>
                       <Button
                         variant="destructive" className="flex-1" disabled={!editable || remove.isPending}
                         onClick={() => remove.mutate()}
                       >
-                        Delete
+                        {t("features.reportDetail.delete")}
                       </Button>
                     </div>
                   )}
                   {!editable && (
                     <p className="mt-2 text-xs text-muted-foreground">
-                      Locked — reports can only be edited on the day they're written. Your manager can still comment.
+                      {t("features.reportDetail.lockedNote")}
                     </p>
                   )}
                 </CardContent>
@@ -83,7 +85,7 @@ export function ReportDetailPage() {
                 <Card>
                   <CardContent className="p-5">
                     <div className="flex items-center justify-between">
-                      <p className="text-sm font-semibold">Workday pace</p>
+                      <p className="text-sm font-semibold">{t("features.reportDetail.workdayPace")}</p>
                       <Badge
                         variant={
                           data.ai_analysis.pace_label === "heavy" ? "warning"
@@ -100,8 +102,7 @@ export function ReportDetailPage() {
                 <Card>
                   <CardContent className="p-5">
                     <p className="text-[13px] text-muted-foreground">
-                      Pace analysis isn't available for this report — it appears shortly after submitting, on companies
-                      with the Mid plan or above.
+                      {t("features.reportDetail.paceUnavailable")}
                     </p>
                   </CardContent>
                 </Card>
@@ -109,8 +110,8 @@ export function ReportDetailPage() {
 
               <Card>
                 <CardContent className="p-5">
-                  <p className="mb-2 text-sm font-semibold">Manager comments</p>
-                  {data.comments.length === 0 && <p className="text-[13px] text-muted-foreground">No comments yet.</p>}
+                  <p className="mb-2 text-sm font-semibold">{t("features.reportDetail.managerComments")}</p>
+                  {data.comments.length === 0 && <p className="text-[13px] text-muted-foreground">{t("features.reportDetail.noComments")}</p>}
                   {data.comments.map((comment) => (
                     <div key={comment.id} className="mb-2 rounded-lg bg-muted/60 p-3">
                       <p className="text-[13px]">{comment.comment}</p>
@@ -129,6 +130,7 @@ export function ReportDetailPage() {
 }
 
 function EditForm({ data, onDone }: { data: ReportDetail; onDone: () => void }) {
+  const { t } = useTranslation();
   const [hours, setHours] = useState(String(data.hours));
   const [summary, setSummary] = useState(data.summary);
   const [error, setError] = useState<string | null>(null);
@@ -139,10 +141,10 @@ function EditForm({ data, onDone }: { data: ReportDetail; onDone: () => void }) 
   });
   return (
     <div className="mt-3 space-y-2">
-      <Input inputMode="decimal" value={hours} onChange={(e) => setHours(e.target.value)} aria-label="Hours" className="max-w-32" />
+      <Input inputMode="decimal" value={hours} onChange={(e) => setHours(e.target.value)} aria-label={t("features.reportDetail.hoursAriaLabel")} className="max-w-32" />
       <Textarea value={summary} onChange={(e) => setSummary(e.target.value)} rows={4} />
       {error && <ErrorText>{error}</ErrorText>}
-      <Button disabled={save.isPending} onClick={() => save.mutate()}>Save changes</Button>
+      <Button disabled={save.isPending} onClick={() => save.mutate()}>{t("features.reportDetail.saveChanges")}</Button>
     </div>
   );
 }

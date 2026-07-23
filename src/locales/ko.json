@@ -1,0 +1,399 @@
+{
+  "common": {
+    "signOut": "로그아웃",
+    "accountMenu": "계정 메뉴",
+    "employeePortal": "직원 포털"
+  },
+  "nav": {
+    "today": "오늘",
+    "reports": "보고서",
+    "health": "건강",
+    "knowledge": "지식",
+    "leave": "휴가",
+    "overtime": "초과근무",
+    "settings": "설정"
+  },
+  "shell": {
+    "notificationsAriaLabel": "Notifications, {{count}} unread"
+  },
+  "settings": {
+    "pageTitle": "설정",
+    "tabs": {
+      "certificates": "증명서",
+      "kudos": "칭찬",
+      "attendance": "출근",
+      "invoices": "청구서",
+      "feedback": "피드백",
+      "language": "언어"
+    },
+    "certificates": {
+      "description": "매월 말과 연말에 자동으로 발급되는 휴대 가능한 업무 기록입니다. 승인이 필요 없습니다.",
+      "empty": "첫 번째 증명서는 이번 달 말에 도착합니다.",
+      "monthlyCertificate": "월간 증명서",
+      "yearlyCertificate": "연간 증명서",
+      "downloadPdf": "PDF 다운로드",
+      "generating": "생성 중"
+    },
+    "kudos": {
+      "description": "매니저가 보내준 칭찬입니다. 임팩트 점수에도 반영됩니다.",
+      "empty": "아직 칭찬이 없습니다 — 도착하면 여기에 표시됩니다."
+    },
+    "attendance": {
+      "empty": "아직 출근 기록이 없습니다.",
+      "open": "열림"
+    },
+    "invoices": {
+      "description": "급여 기간마다 회사에서 생성합니다. 탭하면 전체 내역을 확인하고 다운로드할 수 있습니다.",
+      "empty": "아직 청구서가 없습니다 — 회사에서 급여 기간에 대한 청구서를 생성하면 표시됩니다.",
+      "actual": "실제",
+      "scheduled": "예정"
+    },
+    "feedback": {
+      "harassmentNote": "괴롭힘 신고는 회사 오너에게만 직접 전달됩니다 — 매니저는 볼 수 없습니다.",
+      "messagePlaceholder": "무슨 일이 있나요? 편하신 범위 내에서 구체적으로 작성해 주세요.",
+      "submitAnonymously": "익명으로 제출",
+      "anonymousNote": "이름이 절대 첨부되지 않습니다 — 오너에게도 마찬가지입니다.",
+      "sending": "전송 중…",
+      "send": "피드백 보내기",
+      "yourTickets": "내 티켓",
+      "noneRaised": "아직 제출된 내용이 없습니다.",
+      "submittedAnonymously": "익명으로 제출됨",
+      "categories": {
+        "workload": "업무량",
+        "workplace": "직장 환경",
+        "management": "관리",
+        "harassment": "괴롭힘",
+        "other": "기타"
+      }
+    },
+    "language": {
+      "title": "표시 언어",
+      "description": "회사에서 언어를 설정하지만, 언제든지 영어로 전환할 수 있습니다.",
+      "useEnglish": "영어 사용",
+      "toggleOffHint": "끄면 {{language}}로 전환됩니다.",
+      "toggleOffHintNoAssigned": "회사에서 아직 언어를 지정하지 않았습니다 — 이 설정은 효과가 없습니다.",
+      "names": {
+        "en": "영어",
+        "ja": "일본어",
+        "ko": "한국어",
+        "zh": "중국어",
+        "hi": "힌디어"
+      }
+    }
+  },
+  "features": {
+    "today": {
+      "greeting": "안녕하세요",
+      "greetingWithName": "안녕하세요, {{name}}님",
+      "onTheClock": "근무 중",
+      "since": "{{time}}부터",
+      "lateBadge": "{{minutes}} 지각",
+      "onTimeBadge": "정시",
+      "checkOut": "퇴근",
+      "checkingOut": "퇴근 중…",
+      "checkoutReportNote": "오늘의 보고서를 제출하지 않은 경우, 퇴근 전에 먼저 제출이 요청됩니다.",
+      "offTheClock": "퇴근",
+      "reportAlreadySubmitted": "오늘의 보고서가 이미 제출되었습니다 — 내일 봐요.",
+      "partTimeCheckInNote": "체크인하면 출근 세션이 시작됩니다. 하루에 한 번만 체크인할 수 있습니다.",
+      "shiftEndedNote": "오늘의 근무가 이미 종료되었습니다 — 오늘은 더 이상 체크인할 수 없습니다.",
+      "tooEarlyNote": "체크인은 근무 시작 15분 전부터 가능합니다 — {{time}} 남았습니다.",
+      "checkInStartsSessionNote": "체크인하면 출근 세션이 시작됩니다.",
+      "checkIn": "출근",
+      "checkingIn": "출근 중…",
+      "flexibleHoursNote": "유연 근무 — 고정 근무 시간 없음",
+      "shiftWindow": "근무: {{start}} – {{end}} ({{tz}})",
+      "minutesLeftInShift": "근무 {{time}} 남음",
+      "shiftStartsIn": "근무 시작까지 {{time}}",
+      "onBreak": "휴식 중",
+      "onBreakBadge": "휴식 중",
+      "endBreak": "휴식 종료",
+      "breakTime": "휴식 시간",
+      "breakMinutesToday": "오늘 {{time}}",
+      "noBreakYetToday": "오늘 아직 없음",
+      "startBreak": "휴식 시작",
+      "breakExcludedNote": "휴식 시간은 근무 시간에서 제외됩니다.",
+      "checkedInLate": "{{minutes}} 늦게 출근했습니다.",
+      "checkedOutEarly": "{{minutes}} 일찍 퇴근했습니다.",
+      "dismiss": "닫기",
+      "quickLinks": {
+        "leave": "휴가",
+        "overtime": "초과근무",
+        "history": "기록",
+        "kudos": "칭찬"
+      },
+      "thisWeek": "이번 주",
+      "reportsSubmitted": "제출된 보고서",
+      "hoursLogged": "기록된 시간",
+      "averagePerDay": "일일 평균",
+      "kudosReceived": "받은 칭찬"
+    },
+    "reports": {
+        "pageTitle": "내 보고서",
+        "pageDescription": "하루하루 작업한 내용입니다. 보고서는 자정에 잠기며 — 당일에만 수정할 수 있습니다.",
+        "tabs": {
+        "daily": "일일 보고서",
+        "overtime": "초과근무"
+        },
+        "daily": {
+        "empty": "아직 보고서가 없습니다 — 첫 번째 보고서는 오늘 화면에서 퇴근할 때 작성됩니다.",
+        "editableToday": "오늘 수정 가능",
+        "locked": "잠김"
+        },
+        "overtime": {
+        "empty": "아직 초과근무 기록이 없습니다.",
+        "closed": "종료",
+        "inProgress": "진행 중",
+        "noSummaryYet": "아직 요약 없음"
+        }
+    },
+    "reportDetail": {
+        "reports": "보고서",
+        "edit": "수정",
+        "delete": "삭제",
+        "lockedNote": "잠김 — 보고서는 작성한 당일에만 수정할 수 있습니다. 매니저는 여전히 댓글을 달 수 있습니다.",
+        "workdayPace": "업무 페이스",
+        "paceUnavailable": "이 보고서는 페이스 분석을 사용할 수 없습니다 — Mid 플랜 이상의 회사에서는 제출 후 잠시 후에 표시됩니다.",
+        "managerComments": "매니저 댓글",
+        "noComments": "아직 댓글이 없습니다.",
+        "hoursAriaLabel": "시간",
+        "saveChanges": "변경 사항 저장"
+    },
+    "newReport": {
+        "finishCheckingOut": "퇴근 완료하기",
+        "newReport": "새 보고서",
+        "answerHealthFirst": "먼저 건강 체크인에 답변해 주세요",
+        "multiplePending": "오늘 {{count}}개의 미답변 체크인이 있습니다.",
+        "singlePending": "간단한 질문 하나만 답하면 바로 여기에 보고서 양식이 나타납니다.",
+        "answerNow": "지금 답변하기",
+        "actualWorkedNote": "오늘 실제 근무 시간은 {{time}}입니다(휴식 제외). 아래에 작업을 기록하세요 — 합계는 이보다 적을 수 있지만 초과할 수 없습니다.",
+        "fillOutToFinish": "퇴근을 완료하려면 오늘의 보고서를 작성하세요.",
+        "entryNumber": "항목 {{number}}",
+        "project": "프로젝트",
+        "timeSpent": "소요 시간",
+        "hoursAriaLabel": "시간",
+        "hoursUnit": "시간",
+        "minutesAriaLabel": "분",
+        "minutesUnit": "분",
+        "whatDidYouWorkOn": "무엇을 작업했나요?",
+        "summaryPlaceholder": "몇 문장으로 작성해 주세요 — 매니저와 페이스 분석이 읽습니다.",
+        "overCeiling": "입력한 합계({{entered}})가 실제 근무 시간({{actual}})을 초과했습니다. 항목을 줄여주세요.",
+        "todayInvoice": "오늘 청구서",
+        "addAnotherEntry": "항목 추가",
+        "submitting": "제출 중…",
+        "submitAndCheckOut": "제출 및 퇴근",
+        "submitReport": "보고서 제출",
+        "nothingToReport": "오늘 보고할 내용 없음",
+        "invoiceDialog": {
+            "title": "오늘의 청구서",
+            "loading": "불러오는 중…",
+            "scheduledShift": "예정된 근무",
+            "timeCheckedIn": "체크인 시간",
+            "breakTimeExcluded": "휴식 시간(제외)",
+            "lateArrival": "지각",
+            "none": "없음",
+            "unansweredPresenceChecks": "미답변 재석 확인",
+            "deductionsOffNote": "무응답 공제가 회사에 의해 비활성화되어 있습니다.",
+            "creditedHours": "인정 시간"
+        }
+    },
+    "health": {
+        "pageTitle": "나의 건강",
+        "pageDescription": "이 정보는 본인만 볼 수 있습니다. 회사는 익명의 팀 평균만 볼 수 있으며 — 개인 입력 내용은 절대 볼 수 없습니다.",
+        "reminders": "알림",
+        "allCaughtUp": "모두 완료 — 지금 대기 중인 항목이 없습니다.",
+        "clickToAnswer": "클릭하여 지금 답변하기",
+        "unanswered": "미답변",
+        "answered": "답변 완료",
+        "todaysCheckins": "오늘의 체크인",
+        "noRemindersSentYet": "오늘 아직 알림이 전송되지 않았습니다 — 체크인하면 여기에 표시됩니다.",
+        "thisWeek": "이번 주",
+        "avgWaterPerDay": "일일 평균 수분 섭취량",
+        "avgMood": "평균 기분",
+        "avgSleepPerDay": "일일 평균 수면 시간",
+        "mlValue": "{{value}} ml",
+        "moodValue": "{{value}} / 5",
+        "hoursValue": "{{value}} 시간",
+        "promptTypes": {
+            "sleepCheckin": "수면 체크인",
+            "moodWaterCheckin": "기분 및 수분 체크인"
+        }
+    },
+    "healthCheckin": {
+        "logged": "기록됐습니다!",
+        "sleepQuestion": "어젯밤에 몇 시간 주무셨나요?",
+        "sleepPrivacyNote": "본인만 볼 수 있습니다 — 매니저나 회사와 절대 공유되지 않습니다.",
+        "requiredToContinue": "계속하려면 이 질문에 답변해야 합니다.",
+        "saving": "저장 중…",
+        "sleepOptions": {
+        "lessThan5": "5시간 미만",
+        "fiveToSix": "5~6시간",
+        "sixToSeven": "6~7시간",
+        "sevenToEight": "7~8시간",
+        "eightPlus": "8시간 이상"
+        },
+        "thanksLogged": "감사합니다 — 기록됐습니다!",
+        "quickCheckin": "빠른 체크인",
+        "twoQuestionsNote": "간단한 질문 두 가지 — 몇 초면 됩니다.",
+        "waterQuestion": "오늘 물을 얼마나 마셨나요?",
+        "mlValue": "{{value}}ml",
+        "moodQuestion": "지금 기분이 어떠세요?",
+        "moodOptions": {
+        "great": "최고",
+        "good": "좋음",
+        "okay": "보통",
+        "low": "별로",
+        "rough": "힘듦"
+        },
+        "submit": "제출"
+    },
+    "knowledge": {
+        "pageTitle": "지식 및 공유",
+        "knowledgeDescription": "회사의 노하우와 공지사항입니다. 필독 항목은 확인이 필요합니다.",
+        "sharingDescription": "누구나 공유할 수 있는 열린 게시판 — 회사 전원이 댓글을 달 수 있습니다.",
+        "newPost": "새 게시물",
+        "tabs": {
+        "knowledge": "지식",
+        "sharing": "공유"
+        },
+        "searchPlaceholder": "게시물 검색…",
+        "noPostsFound": "게시물을 찾을 수 없습니다.",
+        "noSharingPostsYet": "아직 공유 게시물이 없습니다 — 첫 번째 게시물을 작성해 보세요.",
+        "mustRead": "필독"
+    },
+    "knowledgeNew": {
+        "knowledgeAndSharing": "지식 및 공유",
+        "newPost": "새 게시물",
+        "type": "유형",
+        "knowledgeHint": "회사 노하우 — 게시는 회사 설정에 따라 제한될 수 있습니다.",
+        "sharingHint": "누구나 게시 가능 — 카테고리 없이 회사 전원이 댓글을 달 수 있는 게시물입니다.",
+        "titleLabel": "제목",
+        "titlePlaceholder": "공유할 만한 내용",
+        "bodyLabel": "본문",
+        "bodyPlaceholder": "새 팀원에게 설명하듯이 작성해 주세요. 링크는 클릭 가능하게 됩니다.",
+        "publishing": "게시 중…",
+        "publish": "게시"
+    },
+    "knowledgePost": {
+        "comments": "댓글 ({{count}})",
+        "noComments": "아직 댓글이 없습니다 — 첫 번째로 답글을 달아보세요.",
+        "you": "나",
+        "someone": "누군가",
+        "author": "작성자",
+        "commentPlaceholder": "댓글이나 제안을 추가하세요…",
+        "postComment": "댓글 게시",
+        "acknowledged": "확인됨 ✓",
+        "mustReadNote": "이것은 필독 항목입니다. 읽은 후 확인해 주세요 — 회사에서 누가 확인했는지 볼 수 있습니다.",
+        "iveReadThis": "읽었습니다"
+    },
+    "leave": {
+        "pageTitle": "휴가",
+        "requestLeave": "휴가 신청",
+        "partialDayQuestion": "하루 중 일부만 신청하시나요?",
+        "partialDayExample": "예: 은행 업무로 2시간",
+        "date": "날짜",
+        "from": "시작",
+        "until": "종료",
+        "firstDay": "첫째 날",
+        "lastDay": "마지막 날",
+        "endTimeError": "종료 시간은 시작 시간 이후여야 합니다.",
+        "sending": "전송 중…",
+        "sendRequest": "신청 보내기",
+        "yourRequests": "내 신청",
+        "empty": "아직 휴가 신청이 없습니다.",
+        "types": {
+            "annual": "연차",
+            "sick": "병가",
+            "unpaid": "무급",
+            "other": "기타"
+        },
+        "statuses": {
+            "pending": "대기 중",
+            "approved": "승인됨",
+            "rejected": "반려됨"
+        }
+    },
+    "overtime": {
+        "pageTitle": "초과근무",
+        "pageDescription": "초과근무는 시작 전에 신청과 승인이 필요하며, 항상 짧은 보고서로 마무리됩니다.",
+        "running": "초과근무 중",
+        "since": "{{time}}부터",
+        "reasonLabel": "사유: {{reason}}",
+        "closingSummaryLabel": "이번 초과근무에서 무엇을 했나요? (세션 종료 시 필수)",
+        "closingSummaryPlaceholder": "짧은 종료 보고서 — 선택이 아닌 필수입니다.",
+        "closing": "종료 중…",
+        "submitAndEnd": "보고서 제출 및 초과근무 종료",
+        "approvedForToday": "오늘 승인됨",
+        "unlocksAt": "{{time}}에 시작 — 그 시간이 되면 버튼이 활성화됩니다.",
+        "starting": "시작 중…",
+        "startOvertime": "초과근무 시작",
+        "noApprovedToday": "오늘 승인된 초과근무 없음",
+        "submitBelowNote": "오늘을 포함한 원하는 날짜에 신청서를 제출하세요 — 매니저가 승인해야 시작할 수 있습니다.",
+        "requestOvertime": "초과근무 신청",
+        "alreadyHaveApproved": "오늘에 대한 승인된 신청이 이미 있습니다",
+        "alreadyHavePending": "오늘에 대한 대기 중인 신청이 이미 있습니다",
+        "tabs": {
+            "requests": "내 신청",
+            "sessions": "지난 세션"
+        },
+        "noRequestsYet": "아직 초과근무 신청이 없습니다.",
+        "nextDay": "(다음 날)",
+        "loading": "불러오는 중…",
+        "noClosedSessions": "아직 종료된 초과근무 세션이 없습니다.",
+        "loadMore": "더 보기",
+        "date": "날짜",
+        "startTime": "시작 시간",
+        "endTime": "종료 시간",
+        "identicalTimeError": "시작 시간과 종료 시간이 같을 수 없습니다.",
+        "spansNextDayNote": "다음 날까지 이어집니다 — {{date}} 다음 날 {{time}}에 종료됩니다.",
+        "selectedDate": "선택한 날짜",
+        "whyNeedOvertime": "초과근무가 필요한 이유는 무엇인가요?",
+        "reasonPlaceholder": "예: 내일 마감 전에 Q3 보고서 마무리",
+        "sending": "전송 중…",
+        "sendRequest": "신청 보내기",
+        "statuses": {
+            "pending": "대기 중",
+            "approved": "승인됨",
+            "rejected": "반려됨"
+        }
+    },
+    "overtimeDetail": {
+        "overtime": "초과근무",
+        "closed": "종료",
+        "inProgress": "진행 중",
+        "ended": "{{time}}에 종료됨",
+        "stillRunning": "아직 진행 중",
+        "initiatedBy": "{{who}}이(가) 시작",
+        "reason": "사유",
+        "closingSummary": "종료 보고서",
+        "noSummaryRecorded": "기록된 요약이 없습니다.",
+        "notClosedYet": "아직 종료되지 않았습니다 — 세션을 종료하려면 요약이 필요합니다.",
+        "aiSummary": "AI 요약"
+    },
+    "notifications": {
+        "pageTitle": "알림",
+        "empty": "새로운 알림이 없습니다."
+    },
+    "onboardingConsent": {
+      "title": "시작하기 전에",
+      "subtitle": "각 항목은 개별적으로 선택할 수 있습니다. 모두 선택하지 않아도 사용할 수 있습니다.",
+      "saving": "저장 중…",
+      "saveChoices": "선택 저장",
+      "items": {
+        "healthTitle": "개인 건강 관리",
+        "healthBody": "수분 섭취, 기분, 휴식, 걸음 수, 수면 — 본인만 볼 수 있습니다. 관리자나 회사는 개인 기록을 볼 수 없으며, 팀에는 3명 이상의 익명 평균만 표시됩니다.",
+        "notificationsTitle": "알림",
+        "notificationsBody": "체크인, 일일 보고서 제출, 휴식, 회사 업데이트에 대한 알림."
+      }
+    },
+    "onboardingChecklist": {
+      "title": "첫 번째 단계",
+      "subtitle": "회사에서 신규 입사자를 위해 설정했습니다. 완료한 항목을 체크하세요 — 이 목록은 프로필에 저장됩니다.",
+      "empty": "체크 항목이 없습니다 — 준비 완료입니다.",
+      "done": "완료",
+      "required": "필수",
+      "optional": "선택",
+      "finishing": "마무리 중…",
+      "takeMeToApp": "앱으로 이동"
+    }
+  }
+}

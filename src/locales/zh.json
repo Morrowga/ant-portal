@@ -1,0 +1,399 @@
+{
+  "common": {
+    "signOut": "退出登录",
+    "accountMenu": "账户菜单",
+    "employeePortal": "员工门户"
+  },
+  "nav": {
+    "today": "今天",
+    "reports": "报告",
+    "health": "健康",
+    "knowledge": "知识库",
+    "leave": "请假",
+    "overtime": "加班",
+    "settings": "设置"
+  },
+  "shell": {
+    "notificationsAriaLabel": "Notifications, {{count}} unread"
+  },
+  "settings": {
+    "pageTitle": "设置",
+    "tabs": {
+      "certificates": "证书",
+      "kudos": "表扬",
+      "attendance": "考勤",
+      "invoices": "发票",
+      "feedback": "反馈",
+      "language": "语言"
+    },
+    "certificates": {
+      "description": "每月末和每年末自动颁发——一份便携的工作记录，无需审批。",
+      "empty": "您的第一张证书将在本月末生成。",
+      "monthlyCertificate": "月度证书",
+      "yearlyCertificate": "年度证书",
+      "downloadPdf": "下载 PDF",
+      "generating": "生成中"
+    },
+    "kudos": {
+      "description": "管理者给您的表扬，同时也会计入您的影响力得分。",
+      "empty": "暂无表扬——收到后将显示在此处。"
+    },
+    "attendance": {
+      "empty": "暂无考勤记录。",
+      "open": "进行中"
+    },
+    "invoices": {
+      "description": "由公司按薪酬周期生成，每期一张。点击可查看完整明细并下载。",
+      "empty": "暂无发票——公司为某个薪酬周期生成发票后将显示在此处。",
+      "actual": "实际",
+      "scheduled": "计划"
+    },
+    "feedback": {
+      "harassmentNote": "骚扰举报将直接发送给公司所有者——管理者无法查看。",
+      "messagePlaceholder": "发生了什么？请在您感到舒适的范围内尽量具体描述。",
+      "submitAnonymously": "匿名提交",
+      "anonymousNote": "您的姓名不会被关联——即使是所有者也无法知晓。",
+      "sending": "发送中…",
+      "send": "发送反馈",
+      "yourTickets": "我的工单",
+      "noneRaised": "尚未提交任何内容。",
+      "submittedAnonymously": "已匿名提交",
+      "categories": {
+        "workload": "工作量",
+        "workplace": "工作环境",
+        "management": "管理",
+        "harassment": "骚扰",
+        "other": "其他"
+      }
+    },
+    "language": {
+      "title": "显示语言",
+      "description": "您的公司设置了语言，但您可以随时切换回英语。",
+      "useEnglish": "使用英语",
+      "toggleOffHint": "关闭后将切换回{{language}}。",
+      "toggleOffHintNoAssigned": "您的公司尚未指定语言——此设置暂无效果。",
+      "names": {
+        "en": "英语",
+        "ja": "日语",
+        "ko": "韩语",
+        "zh": "中文",
+        "hi": "印地语"
+      }
+    }
+  },
+  "features": {
+    "today": {
+      "greeting": "你好",
+      "greetingWithName": "你好，{{name}}",
+      "onTheClock": "上班中",
+      "since": "自{{time}}起",
+      "lateBadge": "迟到{{minutes}}",
+      "onTimeBadge": "准时",
+      "checkOut": "下班打卡",
+      "checkingOut": "正在下班打卡…",
+      "checkoutReportNote": "若今日报告未提交，下班打卡前将先要求提交。",
+      "offTheClock": "已下班",
+      "reportAlreadySubmitted": "今日报告已提交 — 明天见。",
+      "partTimeCheckInNote": "打卡后将开始出勤记录。每天只能打卡一次。",
+      "shiftEndedNote": "今日班次已结束 — 今天无法再打卡。",
+      "tooEarlyNote": "打卡在班次开始前15分钟开放 — 还需等待{{time}}。",
+      "checkInStartsSessionNote": "打卡后将开始出勤记录。",
+      "checkIn": "上班打卡",
+      "checkingIn": "正在打卡…",
+      "flexibleHoursNote": "弹性工时 — 无固定班次",
+      "shiftWindow": "班次：{{start}} – {{end}}（{{tz}}）",
+      "minutesLeftInShift": "班次还剩{{time}}",
+      "shiftStartsIn": "班次将在{{time}}后开始",
+      "onBreak": "休息中",
+      "onBreakBadge": "休息中",
+      "endBreak": "结束休息",
+      "breakTime": "休息时间",
+      "breakMinutesToday": "今日{{time}}",
+      "noBreakYetToday": "今日暂无",
+      "startBreak": "开始休息",
+      "breakExcludedNote": "休息时间不计入工作时长。",
+      "checkedInLate": "您迟到了{{minutes}}。",
+      "checkedOutEarly": "您提前{{minutes}}下班。",
+      "dismiss": "关闭",
+      "quickLinks": {
+        "leave": "请假",
+        "overtime": "加班",
+        "history": "记录",
+        "kudos": "表扬"
+      },
+      "thisWeek": "本周",
+      "reportsSubmitted": "已提交报告",
+      "hoursLogged": "已记录工时",
+      "averagePerDay": "每日平均",
+      "kudosReceived": "收到的表扬"
+    },
+    "reports": {
+        "pageTitle": "我的报告",
+        "pageDescription": "每天的工作内容记录。报告在午夜锁定 — 仅限当天编辑。",
+        "tabs": {
+        "daily": "日报",
+        "overtime": "加班"
+        },
+        "daily": {
+        "empty": "暂无报告 — 第一份报告将在今日页面下班打卡时生成。",
+        "editableToday": "今日可编辑",
+        "locked": "已锁定"
+        },
+        "overtime": {
+        "empty": "暂无加班记录。",
+        "closed": "已结束",
+        "inProgress": "进行中",
+        "noSummaryYet": "暂无摘要"
+        }
+    },
+    "reportDetail": {
+        "reports": "报告",
+        "edit": "编辑",
+        "delete": "删除",
+        "lockedNote": "已锁定 — 报告只能在撰写当天编辑。您的管理者仍可添加评论。",
+        "workdayPace": "工作节奏",
+        "paceUnavailable": "此报告暂无节奏分析 — 提交后不久将显示，适用于 Mid 计划及以上的公司。",
+        "managerComments": "管理者评论",
+        "noComments": "暂无评论。",
+        "hoursAriaLabel": "小时",
+        "saveChanges": "保存更改"
+    },
+    "newReport": {
+        "finishCheckingOut": "完成下班打卡",
+        "newReport": "新报告",
+        "answerHealthFirst": "请先完成健康打卡",
+        "multiplePending": "您今天有 {{count}} 个未回答的打卡。",
+        "singlePending": "只需回答一个简单问题，报告表单将立即显示在此处。",
+        "answerNow": "立即回答",
+        "actualWorkedNote": "您今天实际工作了 {{time}}（不含休息）。请在下方记录任务 — 总计可以少于但不能超过此时间。",
+        "fillOutToFinish": "请填写今日报告以完成下班打卡。",
+        "entryNumber": "条目 {{number}}",
+        "project": "项目",
+        "timeSpent": "花费时间",
+        "hoursAriaLabel": "小时",
+        "hoursUnit": "小时",
+        "minutesAriaLabel": "分钟",
+        "minutesUnit": "分钟",
+        "whatDidYouWorkOn": "您做了什么工作？",
+        "summaryPlaceholder": "请写几句话 — 这是您的管理者和节奏分析将看到的内容。",
+        "overCeiling": "输入总计（{{entered}}）超过了您的实际工作时间（{{actual}}）。请减少条目以符合要求。",
+        "todayInvoice": "今日账单",
+        "addAnotherEntry": "添加条目",
+        "submitting": "提交中…",
+        "submitAndCheckOut": "提交并下班打卡",
+        "submitReport": "提交报告",
+        "nothingToReport": "今天没有需要汇报的内容",
+        "invoiceDialog": {
+            "title": "今日账单",
+            "loading": "加载中…",
+            "scheduledShift": "计划班次",
+            "timeCheckedIn": "打卡时间",
+            "breakTimeExcluded": "休息时间（不计入）",
+            "lateArrival": "迟到",
+            "none": "无",
+            "unansweredPresenceChecks": "未回答的在岗确认",
+            "deductionsOffNote": "您的公司已关闭无响应扣除。",
+            "creditedHours": "计入工时"
+        }
+    },
+    "health": {
+        "pageTitle": "我的健康",
+        "pageDescription": "仅您本人可见。公司只能看到匿名的团队平均数据 — 绝不会看到您的个人记录。",
+        "reminders": "提醒",
+        "allCaughtUp": "全部完成 — 目前没有待处理的内容。",
+        "clickToAnswer": "点击立即回答",
+        "unanswered": "未回答",
+        "answered": "已回答",
+        "todaysCheckins": "今日打卡",
+        "noRemindersSentYet": "今天还没有发送提醒 — 打卡后将显示在此处。",
+        "thisWeek": "本周",
+        "avgWaterPerDay": "每日平均饮水量",
+        "avgMood": "平均情绪",
+        "avgSleepPerDay": "每日平均睡眠时间",
+        "mlValue": "{{value}} ml",
+        "moodValue": "{{value}} / 5",
+        "hoursValue": "{{value}} 小时",
+        "promptTypes": {
+            "sleepCheckin": "睡眠打卡",
+            "moodWaterCheckin": "情绪与饮水打卡"
+        }
+    },
+    "healthCheckin": {
+        "logged": "已记录！",
+        "sleepQuestion": "您昨晚睡了几个小时？",
+        "sleepPrivacyNote": "仅您本人可见 — 绝不会与您的管理者或公司共享。",
+        "requiredToContinue": "继续操作需要回答此问题。",
+        "saving": "保存中…",
+        "sleepOptions": {
+        "lessThan5": "不足5小时",
+        "fiveToSix": "5~6小时",
+        "sixToSeven": "6~7小时",
+        "sevenToEight": "7~8小时",
+        "eightPlus": "8小时以上"
+        },
+        "thanksLogged": "感谢 — 已记录！",
+        "quickCheckin": "快速打卡",
+        "twoQuestionsNote": "两个简单问题 — 只需几秒钟。",
+        "waterQuestion": "您今天喝了多少水？",
+        "mlValue": "{{value}}ml",
+        "moodQuestion": "您现在感觉怎么样？",
+        "moodOptions": {
+        "great": "很好",
+        "good": "好",
+        "okay": "一般",
+        "low": "不太好",
+        "rough": "很差"
+        },
+        "submit": "提交"
+    },
+    "knowledge": {
+        "pageTitle": "知识与分享",
+        "knowledgeDescription": "公司知识与公告。必读内容需要您的确认。",
+        "sharingDescription": "任何人都可以发布的开放帖子 — 公司所有人均可评论。",
+        "newPost": "新帖子",
+        "tabs": {
+        "knowledge": "知识库",
+        "sharing": "分享"
+        },
+        "searchPlaceholder": "搜索帖子…",
+        "noPostsFound": "未找到帖子。",
+        "noSharingPostsYet": "暂无分享帖子 — 来发第一篇吧。",
+        "mustRead": "必读"
+    },
+    "knowledgeNew": {
+        "knowledgeAndSharing": "知识与分享",
+        "newPost": "新帖子",
+        "type": "类型",
+        "knowledgeHint": "公司知识 — 发帖可能受公司设置限制。",
+        "sharingHint": "所有人均可发帖 — 无需分类，公司所有人都可以评论。",
+        "titleLabel": "标题",
+        "titlePlaceholder": "值得分享的内容",
+        "bodyLabel": "正文",
+        "bodyPlaceholder": "像向新队友解释一样来写。链接将变为可点击。",
+        "publishing": "发布中…",
+        "publish": "发布"
+    },
+    "knowledgePost": {
+        "comments": "评论（{{count}}）",
+        "noComments": "暂无评论 — 来第一个回复吧。",
+        "you": "你",
+        "someone": "某人",
+        "author": "作者",
+        "commentPlaceholder": "添加评论或建议…",
+        "postComment": "发表评论",
+        "acknowledged": "已确认 ✓",
+        "mustReadNote": "这是必读内容。阅读后请确认 — 公司可以看到谁已确认。",
+        "iveReadThis": "我已阅读"
+    },
+    "leave": {
+        "pageTitle": "请假",
+        "requestLeave": "申请请假",
+        "partialDayQuestion": "只请半天或更短时间？",
+        "partialDayExample": "例如：去银行办事需要2小时",
+        "date": "日期",
+        "from": "开始",
+        "until": "结束",
+        "firstDay": "第一天",
+        "lastDay": "最后一天",
+        "endTimeError": "结束时间必须晚于开始时间。",
+        "sending": "发送中…",
+        "sendRequest": "发送申请",
+        "yourRequests": "我的申请",
+        "empty": "暂无请假申请。",
+        "types": {
+            "annual": "年假",
+            "sick": "病假",
+            "unpaid": "无薪假",
+            "other": "其他"
+        },
+        "statuses": {
+            "pending": "待审批",
+            "approved": "已批准",
+            "rejected": "已拒绝"
+        }
+    },
+    "overtime": {
+        "pageTitle": "加班",
+        "pageDescription": "加班需要在开始前提交申请并获得批准，且必须以一份简短报告结束。",
+        "running": "加班中",
+        "since": "自{{time}}起",
+        "reasonLabel": "原因：{{reason}}",
+        "closingSummaryLabel": "这次加班完成了什么？（结束会话必填）",
+        "closingSummaryPlaceholder": "简短的结束报告 — 这是必填项，不可跳过。",
+        "closing": "结束中…",
+        "submitAndEnd": "提交报告并结束加班",
+        "approvedForToday": "今日已批准",
+        "unlocksAt": "{{time}}开始 — 届时按钮将解锁。",
+        "starting": "启动中…",
+        "startOvertime": "开始加班",
+        "noApprovedToday": "今日无已批准的加班",
+        "submitBelowNote": "可为任意日期（包括今天）提交申请 — 管理者批准后方可开始。",
+        "requestOvertime": "申请加班",
+        "alreadyHaveApproved": "今天已有一个已批准的申请",
+        "alreadyHavePending": "今天已有一个待审批的申请",
+        "tabs": {
+            "requests": "我的申请",
+            "sessions": "历史记录"
+        },
+        "noRequestsYet": "暂无加班申请。",
+        "nextDay": "（次日）",
+        "loading": "加载中…",
+        "noClosedSessions": "暂无已结束的加班记录。",
+        "loadMore": "加载更多",
+        "date": "日期",
+        "startTime": "开始时间",
+        "endTime": "结束时间",
+        "identicalTimeError": "开始时间和结束时间不能相同。",
+        "spansNextDayNote": "此加班跨至次日 — 结束于{{date}}次日{{time}}。",
+        "selectedDate": "所选日期",
+        "whyNeedOvertime": "为什么需要加班？",
+        "reasonPlaceholder": "例如：在明天截止日期前完成Q3报告",
+        "sending": "发送中…",
+        "sendRequest": "发送申请",
+        "statuses": {
+            "pending": "待审批",
+            "approved": "已批准",
+            "rejected": "已拒绝"
+        }
+    },
+    "overtimeDetail": {
+        "overtime": "加班",
+        "closed": "已结束",
+        "inProgress": "进行中",
+        "ended": "{{time}}结束",
+        "stillRunning": "仍在进行",
+        "initiatedBy": "由{{who}}发起",
+        "reason": "原因",
+        "closingSummary": "结束报告",
+        "noSummaryRecorded": "未记录任何摘要。",
+        "notClosedYet": "尚未结束 — 结束此会话前需提交摘要。",
+        "aiSummary": "AI摘要"
+    },
+    "notifications": {
+        "pageTitle": "通知",
+        "empty": "暂无通知。"
+    },
+    "onboardingConsent": {
+      "title": "开始之前",
+      "subtitle": "每项均可单独选择，全部不选也可正常使用。",
+      "saving": "保存中…",
+      "saveChoices": "保存我的选择",
+      "items": {
+        "healthTitle": "个人健康追踪",
+        "healthBody": "饮水、心情、休息、步数和睡眠 — 仅您本人可见。管理者和公司无法查看您的个人记录；团队只能看到3人以上的匿名平均数据。",
+        "notificationsTitle": "通知",
+        "notificationsBody": "签到提醒、提交日报、休息提示以及公司更新通知。"
+      }
+    },
+    "onboardingChecklist": {
+      "title": "您的第一步",
+      "subtitle": "公司为新员工设置了这些内容。完成后请逐一勾选 — 此列表将保存在您的个人资料中。",
+      "empty": "没有待办事项 — 您已准备就绪。",
+      "done": "已完成",
+      "required": "必填",
+      "optional": "选填",
+      "finishing": "正在完成…",
+      "takeMeToApp": "前往应用"
+    }
+  }
+}

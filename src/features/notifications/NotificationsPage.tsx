@@ -9,6 +9,7 @@
  */
 import { useEffect, useRef } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 import { api } from "@/lib/api-client";
 import { fmtStamp } from "@/lib/format";
@@ -19,6 +20,7 @@ import { EmptyText } from "@/components/shared/bits";
 import { QueryBoundary } from "@/components/shared/QueryBoundary";
 
 export function NotificationsPage() {
+  const { t } = useTranslation();
   const qc = useQueryClient();
   const notifications = useQuery({
     queryKey: ["notifications", "me"],
@@ -44,11 +46,11 @@ export function NotificationsPage() {
 
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="text-xl font-semibold">Notifications</h1>
+      <h1 className="text-xl font-semibold">{t("features.notifications.pageTitle")}</h1>
       <QueryBoundary query={notifications}>
         {(rows) => (
           <div className="mt-4 space-y-2">
-            {rows.length === 0 && <EmptyText>All quiet.</EmptyText>}
+            {rows.length === 0 && <EmptyText>{t("features.notifications.empty")}</EmptyText>}
             {rows.map((notification) => (
               <Card key={notification.id} className={notification.read_at ? "opacity-60" : undefined}>
                 <CardContent className="px-4 py-3">

@@ -5,6 +5,7 @@
  */
 import { jwtDecode } from "jwt-decode";
 import { createContext, useContext } from "react";
+import type { Me } from "./types";
 
 export type Role = "owner_admin" | "manager" | "employee";
 
@@ -34,8 +35,15 @@ export function decodeClaims(token: string): Claims | null {
 
 export interface AuthState {
   claims: Claims | null;
+  me: Me | null;
+  onboarded: boolean;
   login: (email: string, password: string) => Promise<void>;
+  // New: mirrors mobile's acceptInvite -- accepts either the long deep-link
+  // token or the short human-typed code (e.g. "NORTHWIND-7K2XQ9"); the
+  // backend's accept_invite() already tries both against the same input.
+  acceptInvite: (token: string, password: string, fullName?: string) => Promise<void>;
   logout: () => void;
+  refreshMe: () => Promise<Me>;
 }
 
 export const AuthContext = createContext<AuthState | null>(null);

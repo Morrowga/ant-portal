@@ -3,6 +3,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ArrowLeft } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import { api, errorDetail } from "@/lib/api-client";
@@ -15,6 +16,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Chip, ErrorText } from "@/components/shared/bits";
 
 export function KnowledgeNewPage() {
+  const { t } = useTranslation();
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const qc = useQueryClient();
@@ -38,27 +40,27 @@ export function KnowledgeNewPage() {
   return (
     <div className="mx-auto max-w-xl">
       <Button variant="ghost" size="sm" asChild className="-ml-2 mb-3">
-        <Link to="/portal/knowledge"><ArrowLeft className="h-4 w-4" /> Knowledge & Sharing</Link>
+        <Link to="/portal/knowledge"><ArrowLeft className="h-4 w-4" /> {t("features.knowledgeNew.knowledgeAndSharing")}</Link>
       </Button>
-      <h1 className="text-xl font-semibold">New post</h1>
+      <h1 className="text-xl font-semibold">{t("features.knowledgeNew.newPost")}</h1>
       <Card className="mt-4">
         <CardContent className="p-5">
-          <Label className="mb-1.5 block">Type</Label>
+          <Label className="mb-1.5 block">{t("features.knowledgeNew.type")}</Label>
           <div className="mb-1 flex gap-2">
-            <Chip label="Knowledge" selected={postType === "knowledge"} onClick={() => setPostType("knowledge")} />
-            <Chip label="Sharing" selected={postType === "sharing"} onClick={() => setPostType("sharing")} />
+            <Chip label={t("features.knowledge.tabs.knowledge")} selected={postType === "knowledge"} onClick={() => setPostType("knowledge")} />
+            <Chip label={t("features.knowledge.tabs.sharing")} selected={postType === "sharing"} onClick={() => setPostType("sharing")} />
           </div>
           <p className="mb-3 text-xs text-muted-foreground">
             {postType === "knowledge"
-              ? "Company know-how — posting may be limited by your company's settings."
-              : "Open to everyone to post — no category, just a post everyone in the company can comment on."}
+              ? t("features.knowledgeNew.knowledgeHint")
+              : t("features.knowledgeNew.sharingHint")}
           </p>
-          <Label htmlFor="post-title" className="mb-1.5 block">Title</Label>
-          <Input id="post-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Something worth sharing" />
-          <Label htmlFor="post-body" className="mb-1.5 mt-3 block">Body</Label>
+          <Label htmlFor="post-title" className="mb-1.5 block">{t("features.knowledgeNew.titleLabel")}</Label>
+          <Input id="post-title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder={t("features.knowledgeNew.titlePlaceholder")} />
+          <Label htmlFor="post-body" className="mb-1.5 mt-3 block">{t("features.knowledgeNew.bodyLabel")}</Label>
           <Textarea
             id="post-body" rows={8} value={body} onChange={(e) => setBody(e.target.value)}
-            placeholder="Write it the way you'd explain it to a new teammate. Links become clickable."
+            placeholder={t("features.knowledgeNew.bodyPlaceholder")}
           />
           {error && <ErrorText>{error}</ErrorText>}
           <Button
@@ -66,7 +68,7 @@ export function KnowledgeNewPage() {
             disabled={title.trim().length < 3 || body.trim().length < 10 || create.isPending}
             onClick={() => create.mutate()}
           >
-            {create.isPending ? "Publishing…" : "Publish"}
+            {create.isPending ? t("features.knowledgeNew.publishing") : t("features.knowledgeNew.publish")}
           </Button>
         </CardContent>
       </Card>
