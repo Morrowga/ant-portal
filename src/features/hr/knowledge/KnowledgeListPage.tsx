@@ -31,7 +31,7 @@ export function KnowledgeListPage() {
           </p>
         </div>
         <Button asChild size="sm">
-          <Link to={`/portal/knowledge/new?post_type=${tab}`}>{t("features.knowledge.newPost")}</Link>
+          <Link to={`/ants-office/knowledge/new?post_type=${tab}`}>{t("features.knowledge.newPost")}</Link>
         </Button>
       </div>
 
@@ -73,7 +73,7 @@ function PostList({ type, search }: { type: PostType; search: string }) {
               <EmptyText>{type === "knowledge" ? t("features.knowledge.noPostsFound") : t("features.knowledge.noSharingPostsYet")}</EmptyText>
             )}
             {sorted.map((post) => (
-              <Link key={post.id} to={`/portal/knowledge/${post.id}`} className="block">
+              <Link key={post.id} to={`/ants-office/knowledge/${post.id}`} className="block">
                 <Card className="transition-colors hover:bg-muted/40">
                   <CardContent className="px-4 py-3">
                     <div className="flex items-center justify-between gap-2">

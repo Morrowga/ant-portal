@@ -32,8 +32,17 @@ export function LoginPage() {
         navigate("/not-for-you", { replace: true });
         return;
       }
+      // Don't assume where to land -- EmployeeRoute owns that decision
+      // entirely (zero modules -> /no-modules, one -> auto-enters via
+      // the connecting screen, multiple -> the real picker). /launch is
+      // a NEUTRAL spot with no special-cased behavior of its own -- it
+      // always falls into that same general decision logic. /home would
+      // be wrong here: it only redirects away once a module is already
+      // entered, so a fresh login with just one module would show the
+      // picker instead of auto-skipping through it. `from` is still
+      // honored when present (a deep link that bounced through /login).
       const from = (location.state as { from?: { pathname: string } })?.from?.pathname;
-      navigate(from ?? "/portal", { replace: true });
+      navigate(from ?? "/launch", { replace: true });
     } catch (err) {
       setError(errorDetail(err));
     } finally {
@@ -101,7 +110,10 @@ export function AcceptInvitePage() {
     setBusy(true); setError(null);
     try {
       await acceptInvite(token.trim(), password, fullName.trim() || undefined);
-      navigate("/portal", { replace: true });
+      // Same reasoning as LoginPage -- a brand-new account has never
+      // "entered" anything yet, so land neutrally and let EmployeeRoute
+      // decide (auto-enter if one module, /home if several).
+      navigate("/launch", { replace: true });
     } catch (err) {
       setError(errorDetail(err));
     } finally {

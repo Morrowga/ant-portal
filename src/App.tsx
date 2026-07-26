@@ -4,6 +4,7 @@ import { RouterProvider } from "react-router-dom";
 
 import { api } from "@/lib/api-client";
 import { AuthContext, decodeClaims, tokenStore, type Claims } from "@/lib/auth";
+import { clearActiveModule } from "@/lib/activeModule";
 import i18n from "@/lib/i18n";
 import "@/lib/i18n";
 import { queryClient } from "@/lib/query-client";
@@ -28,6 +29,10 @@ export default function App() {
     return data;
   }, []);
 
+  // Session restore on reload -- NOT a fresh login, so activeModule is
+  // deliberately left untouched here: someone mid-session refreshing the
+  // page should stay exactly where they were, not get bounced back
+  // through the connecting screen every time.
   useEffect(() => {
     const refresh = tokenStore.getRefresh();
     if (!refresh) { setBooting(false); return; }
@@ -57,13 +62,22 @@ export default function App() {
     tokenStore.setAccess(data.access_token);
     tokenStore.setRefresh(data.refresh_token);
     setClaims(decodeClaims(data.access_token));
+    // A fresh, explicit login is a real "entering" moment -- clear any
+    // stale activeModule from a PREVIOUS session (this browser, an
+    // earlier login, possibly even a different account entirely on a
+    // shared machine) so EmployeeRoute re-decides from scratch and the
+    // connecting screen shows correctly, instead of silently reusing
+    // whatever was left over from before.
+    clearActiveModule();
     await fetchMe();
   }, [fetchMe]);
 
   // New: mirrors login() above, but hits /auth/accept-invite instead.
   // After success the account behaves exactly like a fresh sign-in --
   // same token persistence, same /me fetch, same onboarding gate applies
-  // downstream via EmployeeRoute.
+  // downstream via EmployeeRoute. Same reasoning for clearActiveModule()
+  // here too -- a brand-new account has definitely never "entered"
+  // anything yet.
   const acceptInvite = useCallback(async (token: string, password: string, fullName?: string) => {
     const { data } = await api.post("/auth/accept-invite", {
       token, password, full_name: fullName || null,
@@ -71,6 +85,7 @@ export default function App() {
     tokenStore.setAccess(data.access_token);
     tokenStore.setRefresh(data.refresh_token);
     setClaims(decodeClaims(data.access_token));
+    clearActiveModule();
     await fetchMe();
   }, [fetchMe]);
 
@@ -80,6 +95,11 @@ export default function App() {
     queryClient.clear();
     setClaims(null);
     setMe(null);
+    // Also clear here, not just on login -- without this, on a SHARED
+    // browser, a different person logging in next would inherit this
+    // session's activeModule and incorrectly skip the connecting screen
+    // as if they'd already entered something themselves.
+    clearActiveModule();
     window.location.assign("/login");
   }, []);
 

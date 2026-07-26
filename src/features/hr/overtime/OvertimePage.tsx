@@ -231,7 +231,7 @@ function PastSessions() {
     <div className="space-y-2">
       {rows.length === 0 && <EmptyText>{t("features.overtime.noClosedSessions")}</EmptyText>}
       {rows.map((session) => (
-        <Link key={session.id} to={`/portal/overtime/${session.id}`} className="block">
+        <Link key={session.id} to={`/ants-office/overtime/${session.id}`} className="block">
           <Card className="transition-colors hover:bg-muted/40">
             <CardContent className="px-4 py-3">
               <div className="flex items-center justify-between">

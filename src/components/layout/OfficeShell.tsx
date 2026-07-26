@@ -19,20 +19,24 @@ import logo from "@/assets/logo.png";
 
 /** labelKey resolves under nav.* -- actual display text comes from i18n,
  * not hardcoded here, so it follows whatever language PortalShell syncs
- * to below once GET /me resolves. */
+ * to below once GET /me resolves.
+ *
+ * Base path is /ants-office (was /portal) -- this is the HR module's own
+ * shell, so these links are legitimately HR-specific, unlike the
+ * module-agnostic /launch, /home, /entering/:key, /no-modules routes. */
 const NAV = [
-  { to: "/portal", labelKey: "today", end: true },
-  { to: "/portal/reports", labelKey: "reports" },
-  { to: "/portal/health", labelKey: "health" },
-  { to: "/portal/knowledge", labelKey: "knowledge" },
-  { to: "/portal/leave", labelKey: "leave" },
-  { to: "/portal/overtime", labelKey: "overtime" },
-  { to: "/portal/settings", labelKey: "settings" },
+  { to: "/ants-office", labelKey: "today", end: true },
+  { to: "/ants-office/reports", labelKey: "reports" },
+  { to: "/ants-office/health", labelKey: "health" },
+  { to: "/ants-office/knowledge", labelKey: "knowledge" },
+  { to: "/ants-office/leave", labelKey: "leave" },
+  { to: "/ants-office/overtime", labelKey: "overtime" },
+  { to: "/ants-office/settings", labelKey: "settings" },
 ];
 
 /** Simple top-nav layout — deliberately NOT the dashboard's AppShell
  *  sidebar, which is built around Owner/Manager navigation. */
-export function PortalShell() {
+export function OfficeShell() {
   const { t, i18n } = useTranslation();
   const { logout } = useAuth();
   const navigate = useNavigate();
@@ -93,7 +97,7 @@ export function PortalShell() {
             <Button
               variant="ghost" size="icon" className="relative text-latte hover:bg-white/10 hover:text-white"
               aria-label={t("shell.notificationsAriaLabel", { count: unread })}
-              onClick={() => navigate("/portal/notifications")}
+              onClick={() => navigate("/ants-office/notifications")}
             >
               <Bell className="h-4 w-4" />
               {unread > 0 && (

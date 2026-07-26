@@ -34,7 +34,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ErrorText, SectionTitle, StatRow } from "@/components/shared/bits";
 import { QueryBoundary } from "@/components/shared/QueryBoundary";
 import { PresenceCheckModal } from "@/components/shared/PresenceCheckModal";
-import { SleepCheckinDialog } from "@/features/health/checkin-dialogs";
+import { SleepCheckinDialog } from "@/features/hr/health/checkin-dialogs";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
@@ -127,7 +127,7 @@ export function TodayPage() {
       // The checkout→report gate: no report yet → the report form takes over
       // in checkout mode and performs the real check-out after submitting.
       if (detail.includes("Submit today's report before checking out")) {
-        navigate("/portal/reports/new?forCheckout=1");
+        navigate("/ants-office/reports/new?forCheckout=1");
         return;
       }
       setError(detail);
@@ -297,10 +297,10 @@ export function TodayPage() {
       {error && <ErrorText>{error}</ErrorText>}
 
       <div className="mt-5 flex flex-wrap gap-2">
-        <QuickLink to="/portal/leave" label={t("features.today.quickLinks.leave")} />
-        <QuickLink to="/portal/overtime" label={t("features.today.quickLinks.overtime")} />
-        <QuickLink to="/portal/settings?tab=attendance" label={t("features.today.quickLinks.history")} />
-        <QuickLink to="/portal/settings?tab=kudos" label={t("features.today.quickLinks.kudos")} />
+        <QuickLink to="/ants-office/leave" label={t("features.today.quickLinks.leave")} />
+        <QuickLink to="/ants-office/overtime" label={t("features.today.quickLinks.overtime")} />
+        <QuickLink to="/ants-office/settings?tab=attendance" label={t("features.today.quickLinks.history")} />
+        <QuickLink to="/ants-office/settings?tab=kudos" label={t("features.today.quickLinks.kudos")} />
       </div>
 
       <WeekSummary reports={reports.data ?? []} kudosCount={kudos.data?.length ?? 0} />

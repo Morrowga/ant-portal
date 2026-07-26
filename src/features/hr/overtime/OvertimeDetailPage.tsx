@@ -26,7 +26,7 @@ export function OvertimeDetailPage() {
   return (
     <div className="mx-auto max-w-xl">
       <Button variant="ghost" size="sm" asChild className="-ml-2 mb-3">
-        <Link to="/portal/overtime"><ArrowLeft className="h-4 w-4" /> {t("features.overtimeDetail.overtime")}</Link>
+        <Link to="/ants-office/overtime"><ArrowLeft className="h-4 w-4" /> {t("features.overtimeDetail.overtime")}</Link>
       </Button>
       <QueryBoundary query={overtime}>
         {(ot) => (

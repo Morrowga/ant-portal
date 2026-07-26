@@ -1,0 +1,43 @@
+name: Employee Portal CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Typecheck
+        run: yarn typecheck
+
+      - name: Build
+        run: yarn build
+        env:
+          # Placeholder -- Vite inlines VITE_* vars at BUILD time, not
+          # runtime, so this must be a real value in this repo's Settings
+          # -> Secrets and variables -> Actions for the build to actually
+          # work against your real API. Firebase config is NOT listed
+          # here on purpose -- it's hardcoded directly in source (e.g.
+          # src/lib/firebase.ts), not read from env vars in this project,
+          # so there's nothing for CI to inject for it.
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: employee-portal-dist
+          path: dist/
+          retention-days: 7

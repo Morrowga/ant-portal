@@ -28,7 +28,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Chip, ErrorText } from "@/components/shared/bits";
 import { QueryBoundary } from "@/components/shared/QueryBoundary";
-import { MoodWaterCheckinDialog, SleepCheckinDialog } from "@/features/health/checkin-dialogs";
+import { MoodWaterCheckinDialog, SleepCheckinDialog } from "@/features/hr/health/checkin-dialogs";
 
 interface Entry { project_id: number | null; hours: string; minutes: string; summary: string }
 
@@ -86,14 +86,14 @@ export function NewReportPage() {
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ["reports"] });
       qc.invalidateQueries({ queryKey: ["attendance"] });
-      navigate(isForCheckout ? "/portal" : "/portal/reports", { replace: isForCheckout });
+      navigate(isForCheckout ? "/ants-office" : "/ants-office/reports", { replace: isForCheckout });
     },
     onError: (e) => setError(errorDetail(e)),
   });
 
   const nothingToReport = useMutation({
     mutationFn: () => api.post("/reports/no-project-today"),
-    onSuccess: () => navigate("/portal/reports"),
+    onSuccess: () => navigate("/ants-office/reports"),
     onError: (e) => setError(errorDetail(e)),
   });
 

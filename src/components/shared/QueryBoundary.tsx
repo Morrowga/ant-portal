@@ -41,11 +41,11 @@ export function PlanGateCard({ detail }: { detail?: string }) {
           <Lock className="h-5 w-5 text-accent-foreground" />
         </div>
         <div>
-          <p className="font-display font-semibold">Feature unavailable</p>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <p className="font-display font-semibold">Feature Unavailable</p>
+          {/* <p className="mt-1 text-sm text-muted-foreground">
             {detail ?? "Your company's plan doesn't include this."}
             <br />Ask your company admin — plans are managed on the company dashboard.
-          </p>
+          </p> */}
         </div>
       </CardContent>
     </Card>

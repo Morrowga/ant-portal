@@ -7,9 +7,10 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 
 import { API_BASE_URL, api, errorDetail } from "@/lib/api-client";
+import { clearActiveModule } from "@/lib/activeModule";
 import { fmtClock, fmtDay, fmtDayLong } from "@/lib/format";
 import type { AttendanceSession, Certificate, FeedbackTicket, Me, PayrollInvoice, Recognition } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
@@ -29,6 +30,7 @@ const ASSIGNED_LANGUAGE_KEY = "ants.portal.assigned_language";
 
 export function SettingsPage() {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
   const requested = params.get("tab");
   const tab: Tab = (TABS as readonly string[]).includes(requested ?? "") ? (requested as Tab) : "certificates";
@@ -36,6 +38,33 @@ export function SettingsPage() {
   return (
     <div className="mx-auto max-w-2xl">
       <h1 className="text-xl font-semibold">{t("settings.pageTitle")}</h1>
+
+      {/* New: Exit -- distinct from Sign out (which lives elsewhere, e.g.
+          PortalShell's nav). Exit leaves this module WITHOUT ending the
+          session, and returns to Home so the person can pick a different
+          active module. Always shown, even with only one module active
+          today -- Home still works correctly in that case (it just shows
+          the one card to re-enter). */}
+      <Card className="mt-4">
+        <CardContent className="flex items-center justify-between px-4 py-3">
+          <div className="pr-3">
+            <p className="text-sm font-medium">Exit this module</p>
+            <p className="text-xs text-muted-foreground">
+              Go back and choose a different module. You'll stay signed in.
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            onClick={() => {
+              clearActiveModule();
+              navigate("/home", { replace: true });
+            }}
+          >
+            Exit
+          </Button>
+        </CardContent>
+      </Card>
+
       <Tabs value={tab} onValueChange={(value) => setParams({ tab: value }, { replace: true })} className="mt-4">
         <TabsList className="grid w-full grid-cols-3 sm:w-auto sm:inline-grid sm:grid-cols-6">
           <TabsTrigger value="certificates">{t("settings.tabs.certificates")}</TabsTrigger>
@@ -202,7 +231,7 @@ function InvoicesTab() {
           <div className="space-y-2">
             {rows.length === 0 && <EmptyText>{t("settings.invoices.empty")}</EmptyText>}
             {[...rows].sort((a, b) => b.period_start.localeCompare(a.period_start)).map((invoice) => (
-              <Link key={invoice.id} to={`/portal/invoices/${invoice.id}`}>
+              <Link key={invoice.id} to={`/ants-office/invoices/${invoice.id}`}>
                 <Card className="transition-colors hover:bg-muted/50">
                   <CardContent className="flex items-center justify-between px-4 py-3">
                     <div>

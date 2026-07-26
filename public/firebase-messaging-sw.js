@@ -26,14 +26,14 @@ function routeForType(type) {
   switch (type) {
     case "sleep_checkin":
     case "mood_water_checkin":
-      return "/portal/health";
+      return "/ants-office/health";
     case "presence_check":
-      return "/portal";
+      return "/ants-office";
     case "overtime_request":
     case "overtime_decision":
-      return "/portal/overtime";
+      return "/ants-office/overtime";
     default:
-      return "/portal";
+      return "/ants-office";
   }
 }
 

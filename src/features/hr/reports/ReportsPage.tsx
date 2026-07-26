@@ -45,7 +45,7 @@ function DailyList() {
         <div className="space-y-2">
           {rows.length === 0 && <EmptyText>{t("features.reports.daily.empty")}</EmptyText>}
           {rows.map((report) => (
-            <Link key={report.id} to={`/portal/reports/${report.id}`} className="block">
+            <Link key={report.id} to={`/ants-office/reports/${report.id}`} className="block">
               <Card className="transition-colors hover:bg-muted/40">
                 <CardContent className="px-4 py-3">
                   <div className="flex items-center justify-between">
@@ -79,7 +79,7 @@ function OvertimeList() {
         <div className="space-y-2">
           {rows.length === 0 && <EmptyText>{t("features.reports.overtime.empty")}</EmptyText>}
           {rows.map((ot) => (
-            <Link key={ot.id} to={`/portal/overtime/${ot.id}`} className="block">
+            <Link key={ot.id} to={`/ants-office/overtime/${ot.id}`} className="block">
               <Card className="transition-colors hover:bg-muted/40">
                 <CardContent className="px-4 py-3">
                   <div className="flex items-center justify-between">

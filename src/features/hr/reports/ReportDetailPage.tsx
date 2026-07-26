@@ -31,14 +31,14 @@ export function ReportDetailPage() {
 
   const remove = useMutation({
     mutationFn: () => api.delete(`/reports/${id}`),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["reports"] }); navigate("/portal/reports"); },
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["reports"] }); navigate("/ants-office/reports"); },
     onError: (e) => setError(errorDetail(e)),
   });
 
   return (
     <div className="mx-auto max-w-xl">
       <Button variant="ghost" size="sm" asChild className="-ml-2 mb-3">
-        <Link to="/portal/reports"><ArrowLeft className="h-4 w-4" /> {t("features.reportDetail.reports")}</Link>
+        <Link to="/ants-office/reports"><ArrowLeft className="h-4 w-4" /> {t("features.reportDetail.reports")}</Link>
       </Button>
       <QueryBoundary query={report}>
         {(data) => {

@@ -44,7 +44,7 @@ export function InvoiceDetailPage() {
 
   return (
     <div className="mx-auto max-w-lg">
-      <Link to="/portal/settings?tab=invoices" className="mb-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
+      <Link to="/ants-office/settings?tab=invoices" className="mb-4 inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">
         <ArrowLeft className="h-4 w-4" /> Invoices
       </Link>
 

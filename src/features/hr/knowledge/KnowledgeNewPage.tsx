@@ -33,14 +33,14 @@ export function KnowledgeNewPage() {
         post_type: postType,
         ...(postType === "knowledge" ? { category: "general" } : {}),
       }),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: ["knowledge"] }); navigate("/portal/knowledge"); },
+    onSuccess: () => { qc.invalidateQueries({ queryKey: ["knowledge"] }); navigate("/ants-office/knowledge"); },
     onError: (e) => setError(errorDetail(e)),
   });
 
   return (
     <div className="mx-auto max-w-xl">
       <Button variant="ghost" size="sm" asChild className="-ml-2 mb-3">
-        <Link to="/portal/knowledge"><ArrowLeft className="h-4 w-4" /> {t("features.knowledgeNew.knowledgeAndSharing")}</Link>
+        <Link to="/ants-office/knowledge"><ArrowLeft className="h-4 w-4" /> {t("features.knowledgeNew.knowledgeAndSharing")}</Link>
       </Button>
       <h1 className="text-xl font-semibold">{t("features.knowledgeNew.newPost")}</h1>
       <Card className="mt-4">

@@ -4,6 +4,9 @@
     "accountMenu": "账户菜单",
     "employeePortal": "员工门户"
   },
+  "home": {
+    "availableApps": "可用应用"
+  },
   "nav": {
     "today": "今天",
     "reports": "报告",
@@ -82,6 +85,9 @@
     }
   },
   "features": {
+    "entering": {
+      "connectingWith": "正在连接{{module}}"
+    },
     "today": {
       "greeting": "你好",
       "greetingWithName": "你好，{{name}}",

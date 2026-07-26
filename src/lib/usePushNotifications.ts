@@ -10,14 +10,14 @@ function routeForType(type: string | undefined, data: Record<string, string>): s
   switch (type) {
     case "sleep_checkin":
     case "mood_water_checkin":
-      return "/portal/health";
+      return "/ants-office/health";
     case "presence_check":
       // No dedicated route anymore — presence checks only ever show on
       // Today, driven by polled status. Just send them there.
       return "/portal";
     case "overtime_request":
     case "overtime_decision":
-      return "/portal/overtime";
+      return "/ants-office/overtime";
     default:
       return null;
   }
