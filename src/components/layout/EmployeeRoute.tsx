@@ -100,18 +100,49 @@ export function EmployeeRoute() {
 
   // General case (any module route, e.g. /entering/:key or /ants-office
   // reached directly via bookmark/back-button): also side-effect-free.
-  // If nothing's active yet and there's exactly one module, redirect
-  // through /entering/{key} -- EnteringModulePage sets activeModule
-  // itself once it actually mounts, not here.
   if (!activeModule) {
-    if (activeKeys.length === 1) {
+    // BUG FIX: this used to only handle the single-module case --
+    // `activeKeys.length === 1` -- and treated anything else (2+
+    // modules) as automatically invalid, bouncing straight back to
+    // /home. That's wrong: when a company has 2+ modules, HomePage's own
+    // picker deliberately navigates here (to /entering/{key} for
+    // whichever tile was clicked) BEFORE EnteringModulePage has had a
+    // chance to mount and actually set activeModule -- so at the exact
+    // instant this guard runs, activeModule is still null even though
+    // the navigation itself is entirely legitimate. The old code's
+    // `else` branch caught this in-flight, valid navigation and
+    // immediately redirected back to /home, which is exactly the
+    // Home -> flash -> Home loop reported after Exit: any click on a
+    // tile, with 2+ modules active, could never actually complete.
+    //
+    // This was never hit before because every test account only ever
+    // had ONE active module at a time -- it only surfaced once a
+    // company (Northwind) genuinely had two modules enabled together.
+    //
+    // Fix: recognize "the current path IS already /entering/{key} for a
+    // real, currently-active module key" as a valid, complete state on
+    // its own, regardless of how many total modules exist. Only fall
+    // through to the single-module auto-redirect / home-redirect
+    // behavior when the current path ISN'T already a legitimate
+    // in-flight entry.
+    const enteringMatch = /^\/entering\/([^/]+)$/.exec(location.pathname);
+    const enteringKeyFromPath = enteringMatch?.[1];
+    const alreadyEnteringValidModule = !!enteringKeyFromPath && activeKeys.includes(enteringKeyFromPath);
+
+    if (alreadyEnteringValidModule) {
+      // Let it render -- EnteringModulePage's own mount effect is what
+      // actually sets activeModule, not this guard.
+    } else if (activeKeys.length === 1) {
       const onlyKey = activeKeys[0];
       if (location.pathname !== `/entering/${onlyKey}`) {
         return <Navigate to={`/entering/${onlyKey}`} replace />;
       }
-      // else: exactly on /entering/{onlyKey} already -- let it render;
-      // ITS OWN mount effect is what sets activeModule, not us.
+      // else: exactly on /entering/{onlyKey} already -- let it render.
     } else {
+      // 2+ modules, activeModule not set, and NOT already correctly
+      // heading into one of them via /entering/{key} -- e.g. someone
+      // bookmarked /ants-office directly with nothing active yet. No
+      // way to know which module they mean, so send them to the picker.
       return <Navigate to="/home" replace />;
     }
   }
