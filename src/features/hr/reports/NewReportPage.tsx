@@ -11,6 +11,7 @@
  * ever lost (same fix the mobile app made).
  */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { X } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -66,6 +67,13 @@ export function NewReportPage() {
 
   const update = (i: number, patch: Partial<Entry>) =>
     setEntries((prev) => prev.map((entry, j) => (j === i ? { ...entry, ...patch } : entry)));
+
+  // New: removes one entry by index. Always keeps at least one entry --
+  // the remove button itself is hidden when there's only one (see below),
+  // but this guard stays as a second line of defense regardless of how
+  // it's called.
+  const removeEntry = (i: number) =>
+    setEntries((prev) => (prev.length <= 1 ? prev : prev.filter((_, j) => j !== i)));
 
   const actualMinutes = status.data?.actual_working_minutes_today ?? null;
   const totalEnteredHours = entries.reduce((sum, e) => sum + toDecimalHours(e.hours, e.minutes), 0);
@@ -138,9 +146,24 @@ export function NewReportPage() {
               {entries.map((entry, i) => (
                 <Card key={i} className="mt-3">
                   <CardContent className="p-4">
-                    <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                      {t("features.newReport.entryNumber", { number: i + 1 })}
-                    </p>
+                    <div className="mb-2 flex items-center justify-between">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                        {t("features.newReport.entryNumber", { number: i + 1 })}
+                      </p>
+                      {/* New: remove this entry -- hidden entirely when
+                          it's the only one, since at least one entry is
+                          always required to submit. */}
+                      {entries.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => removeEntry(i)}
+                          className="text-muted-foreground hover:text-destructive"
+                          aria-label={t("features.newReport.removeEntry")}
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      )}
+                    </div>
                     <Label className="mb-1.5 block">{t("features.newReport.project")}</Label>
                     <div className="mb-3 flex flex-wrap gap-2">
                       {(projects.data ?? []).map((project) => (
@@ -151,6 +174,14 @@ export function NewReportPage() {
                           onClick={() => update(i, { project_id: project.id })}
                         />
                       ))}
+                      {/* New: visible fallback instead of silently
+                          rendering nothing when there are no projects --
+                          makes an empty list diagnosable (a real "no
+                          projects exist" state) rather than looking
+                          identical to a broken/missing section. */}
+                      {projects.isSuccess && (projects.data ?? []).length === 0 && (
+                        <p className="text-xs text-muted-foreground">{t("features.newReport.noProjectsAvailable")}</p>
+                      )}
                     </div>
                     <Label className="mb-1.5 block">{t("features.newReport.timeSpent")}</Label>
                     <div className="mb-3 flex gap-2">

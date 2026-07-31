@@ -189,6 +189,8 @@
         "submitAndCheckOut": "제출 및 퇴근",
         "submitReport": "보고서 제출",
         "nothingToReport": "오늘 보고할 내용 없음",
+        "removeEntry": "항목 삭제",
+        "noProjectsAvailable": "사용 가능한 프로젝트가 없습니다",
         "invoiceDialog": {
             "title": "오늘의 청구서",
             "loading": "불러오는 중…",

@@ -189,6 +189,8 @@
             "submitAndCheckOut": "Submit & check out",
             "submitReport": "Submit report",
             "nothingToReport": "Nothing to report today",
+            "removeEntry": "Remove entry",
+            "noProjectsAvailable": "No projects available",
             "invoiceDialog": {
                 "title": "Today's invoice",
                 "loading": "Loading…",

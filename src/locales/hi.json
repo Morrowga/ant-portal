@@ -189,6 +189,8 @@
       "submitAndCheckOut": "सबमिट करें और चेक आउट करें",
       "submitReport": "रिपोर्ट सबमिट करें",
       "nothingToReport": "आज कुछ भी रिपोर्ट करने योग्य नहीं",
+      "removeEntry": "प्रविष्टि हटाएं",
+      "noProjectsAvailable": "कोई प्रोजेक्ट उपलब्ध नहीं",
       "invoiceDialog": {
         "title": "आज का चालान",
         "loading": "लोड हो रहा है…",

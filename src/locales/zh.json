@@ -189,6 +189,8 @@
         "submitAndCheckOut": "提交并下班打卡",
         "submitReport": "提交报告",
         "nothingToReport": "今天没有需要汇报的内容",
+        "removeEntry": "删除条目",
+        "noProjectsAvailable": "暂无可用项目",
         "invoiceDialog": {
             "title": "今日账单",
             "loading": "加载中…",
